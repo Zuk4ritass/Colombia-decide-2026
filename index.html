@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colombia Decide 2026 — Comparativa de Programas de Gobierno</title>
+  <meta name="description" content="Compara de forma objetiva los programas de gobierno de los candidatos a la presidencia de Colombia 2026." />
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f0f4f8;
+      --surface:   #ffffff;
+      --border:    #e2e8f0;
+      --text:      #1a202c;
+      --muted:     #718096;
+      --accent:    #1a56db;
+
+      /* Candidate colors — paleta neutra sin rojo ni azul partidista */
+      --cepeda:    #0e7490;
+      --espriella: #78716c;
+      --paloma:    #c2410c;
+      --barreras:  #047857;
+      --claudia:   #7c3aed;
+      --fajardo:   #d97706;
+
+      --radius: 14px;
+      --shadow: 0 2px 16px rgba(0,0,0,.08);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a6e 50%, #1a56db 100%);
+      color: #fff;
+      padding: 64px 24px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-flag {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero h1 span { color: #fbbf24; }
+    .hero p {
+      font-size: clamp(15px, 2vw, 18px);
+      color: rgba(255,255,255,.75);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .badge {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+    .badge.warning { background: rgba(251,191,36,.15); border-color: rgba(251,191,36,.4); color: #fbbf24; }
+
+    /* Countdown */
+    .countdown-wrap {
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .countdown-box {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      padding: 12px 20px;
+      text-align: center;
+      min-width: 72px;
+    }
+    .countdown-box .num {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1;
+      display: block;
+    }
+    .countdown-box .lbl {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,.6);
+      margin-top: 4px;
+    }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 14px 20px;
+      margin: 24px auto;
+      max-width: 1140px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: #78350f;
+    }
+    .disclaimer strong { color: #92400e; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+    .section { padding: 48px 0; }
+    .section-title {
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .icon { font-size: 28px; }
+    .section-sub { color: var(--muted); margin-bottom: 28px; font-size: 14px; }
+
+    /* ── CANDIDATE CARDS ── */
+    .candidates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .candidate-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      border: 1px solid var(--border);
+    }
+    .candidate-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+    .card-header {
+      padding: 20px 20px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      border: 3px solid rgba(255,255,255,.4);
+    }
+    .card-name { font-size: 17px; font-weight: 700; line-height: 1.2; }
+    .card-vp { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .card-party {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-top: 6px;
+      color: #fff;
+    }
+    .card-position {
+      font-size: 10.5px;
+      color: var(--muted);
+      margin-top: 3px;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity .25s ease, max-height .25s ease;
+    }
+    .candidate-card:hover .card-position {
+      opacity: 1;
+      max-height: 20px;
+    }
+    .card-body { padding: 16px 20px; }
+
+    /* ── Acordeón de perfil ── */
+    .profile-accordion {
+      margin-top: 14px;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+    .profile-accordion summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      user-select: none;
+      transition: color .2s;
+    }
+    .profile-accordion summary::-webkit-details-marker { display: none; }
+    .profile-accordion summary:hover { color: var(--text); }
+    .profile-accordion[open] > summary { color: var(--text); margin-bottom: 12px; }
+    .acc-arrow { transition: transform .2s; display: inline-block; font-style: normal; }
+    .profile-accordion[open] .acc-arrow { transform: rotate(180deg); }
+    .profile-section { margin-bottom: 10px; }
+    .profile-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+    .profile-text {
+      font-size: 12px;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .profile-vp {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+      border: 1px solid var(--border);
+    }
+    .vp-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .vp-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+    .vp-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .vp-role { font-size: 10.5px; color: var(--muted); margin-top: 1px; }
+    .card-body p {
+      font-size: 13px;
+      color: #4a5568;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .card-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity .2s;
+      color: #fff;
+    }
+    .card-link:hover { opacity: .85; }
+    .card-link.outline {
+      background: transparent;
+      border: 1.5px solid currentColor;
+      color: inherit;
+    }
+    .no-link {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ── COMPARATIVA POR TEMA ── */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border: 2px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .tab-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .compare-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .compare-card-header {
+      padding: 12px 16px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .compare-card-header .mini-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .compare-card-header .cname { font-size: 14px; font-weight: 700; }
+    .compare-card-body { padding: 14px 16px; }
+    .proposal-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #374151;
+      line-height: 1.5;
+    }
+    .proposal-item:last-child { margin-bottom: 0; }
+    .proposal-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+    .no-data {
+      color: var(--muted);
+      font-size: 13px;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── WHAT / HOW BLOCKS ── */
+    .what-block { margin-bottom: 10px; }
+    .how-block {
+      background: #f8fafc;
+      border-left: 3px solid #cbd5e0;
+      border-radius: 0 6px 6px 0;
+      padding: 10px 12px;
+      margin-top: 10px;
+      margin-bottom: 8px;
+    }
+    .block-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .how-text {
+      font-size: 12.5px;
+      color: #374151;
+      line-height: 1.55;
+      margin: 0;
+    }
+    .how-text.no-info {
+      color: #92400e;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    /* Sources tags */
+    .sources-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-top: 8px;
+      text-decoration: none;
+      color: #fff;
+      opacity: .85;
+      transition: opacity .2s;
+    }
+    .sources-tag:hover { opacity: 1; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 20px 28px;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      align-items: center;
+    }
+    .stat { text-align: center; }
+    .stat .n { font-size: 28px; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat .l { font-size: 12px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── POLITICAL SPECTRUM ── */
+    .spectrum-bar {
+      background: linear-gradient(to right, #dc2626, #7c3aed, #3b82f6, #047857);
+      height: 8px;
+      border-radius: 999px;
+      margin: 12px 0;
+      position: relative;
+    }
+    .spectrum-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0f172a;
+      color: rgba(255,255,255,.7);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    footer a { color: #60a5fa; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    footer .footer-grid {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    footer .footer-col { text-align: left; min-width: 200px; }
+    footer .footer-col h4 { color: #fff; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    footer .footer-col a { display: block; font-size: 13px; margin-bottom: 6px; color: rgba(255,255,255,.6); }
+    footer .footer-col a:hover { color: #60a5fa; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 24px 0; }
+    .footer-note { font-size: 12px; color: rgba(255,255,255,.4); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .stats-bar { gap: 16px; justify-content: center; }
+      .hero { padding: 40px 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     HERO
+════════════════════════════════════ -->
+<header class="hero">
+  <div class="hero-flag">🇨🇴</div>
+  <h1>Colombia <span>Decide</span> 2026</h1>
+  <p>Consulta, compara y decide con información. Programas de gobierno de los candidatos a la Presidencia de Colombia — sin sesgos, sin publicidad.</p>
+  <div class="hero-badges">
+    <span class="badge">📅 Primera vuelta: 31 de mayo 2026</span>
+    <span class="badge">🗳️ 14 candidatos inscritos</span>
+    <span class="badge warning">⚖️ Contenido objetivo e independiente</span>
+  </div>
+
+  <!-- Countdown -->
+  <div class="countdown-wrap">
+    <div class="countdown-box"><span class="num" id="cd-days">--</span><span class="lbl">Días</span></div>
+    <div class="countdown-box"><span class="num" id="cd-hours">--</span><span class="lbl">Horas</span></div>
+    <div class="countdown-box"><span class="num" id="cd-minutes">--</span><span class="lbl">Min</span></div>
+    <div class="countdown-box"><span class="num" id="cd-seconds">--</span><span class="lbl">Seg</span></div>
+  </div>
+</header>
+
+<!-- DISCLAIMER -->
+<div class="container">
+  <div class="disclaimer">
+    <strong>📌 Nota de transparencia:</strong> Esta página es un recurso informativo independiente. Las propuestas se extractaron de programas de gobierno oficiales y medios de comunicación verificados. No promovemos ni atacamos ninguna candidatura. Para información completa, consulta los documentos oficiales enlazados en cada ficha.
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     STATS
+════════════════════════════════════ -->
+<div class="container">
+  <div class="stats-bar">
+    <div class="stat"><div class="n">14</div><div class="l">Candidatos inscritos</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">Con programa publicado</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">Temas comparados</div></div>
+    <div class="stat"><div class="n">31<br><small style="font-size:14px;font-weight:400;color:var(--muted)">mayo</small></div><div class="l">Primera vuelta</div></div>
+    <div class="stat"><div class="n">21<br><small style="font-size:14px;font-weight:400;color:var(--muted)">junio</small></div><div class="l">Segunda vuelta (si aplica)</div></div>
+    <div style="flex:1; min-width:200px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;font-weight:600;">Espectro político (referencia general)</div>
+      <div class="spectrum-bar"></div>
+      <div class="spectrum-label"><span>Izquierda</span><span>Centro</span><span>Derecha</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     CANDIDATOS
+════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="icon">🧑‍💼</span> Candidatos principales</h2>
+    <p class="section-sub">Los 6 candidatos con mayor visibilidad pública y programas de gobierno publicados a la fecha de esta edición (abril 2026).</p>
+
+    <div class="candidates-grid">
+
+      <!-- ── Iván Cepeda ── -->
+      <div class="candidate-card">
+        <div class="card-header">
+          <div class="avatar" style="background: var(--cepeda)">IC</div>
+          <div>
+            <div class="card-name">Iván Cepeda Castro</div>
+            <div class="card-vp">VP fórmula: Aida Quilcué</div>
+            <span class="card-party" style="background: var(--cepeda)">Pacto Histórico</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Senador y defensor de derechos humanos. Ganó la consulta del Pacto Histórico en marzo de 2026. Su propuesta gira en torno a la justicia social, la paz y la austeridad fiscal.</p>
+          <details class="profile-accordion">
+            <summary>👤 Ver perfil completo <i class="acc-arrow">▾</i></summary>
+            <div class="profile-section">
+              <div class="profile-label">🎓 Formación</div>
+              <div class="profile-text">Filosofía, Universidad San Clemente de Ohrid (Sofía, Bulgaria, 1987). Maestría en Derecho Internacional Humanitario, Universidad Católica de Lyon (Francia, 2002).</div>
+            </div>
+            <div class="profile-section">
+              <div class="profile-label">📌 Trayectoria</div>
+              <div class="profile-text">Activista de derechos humanos e hijo del senador Manuel Cepeda Vargas, asesinado en 1994. Vivió exiliado en Europa y Cuba durante su infancia. Representante a la Cámara (2010–2014). Senador desde 2014. Ha investigado nexos entre paramilitarismo y política.</div>
+            </div>
+            <div class="profile-vp">
+              <div class="vp-header">
+                <div class="vp-avatar" style="background:var(--cepeda)">AQ</div>
+                <div>
+                  <div class="vp-name">Aída Quilcué</div>
+                  <div class="vp-role">Fórmula Vicepresidencial</div>
+                </div>
+              </div>
+              <div class="profile-section">
+                <div class="profile-label">🎓 Formación</div>
+                <div class="profile-text">Líder del pueblo Nasa (Cauca). Formación en liderazgo comunitario e indigenismo en el CRIC (Consejo Regional Indígena del Cauca).</div>
+              </div>
+              <div class="profile-section" style="margin-bottom:0">
+                <div class="profile-label">📌 Trayectoria</div>
+                <div class="profile-text">Consejera Mayor del CRIC (2007–2009). Su esposo Edwin Legarda fue asesinado en 2008. Impulsora histórica de la Minga indígena. Senadora de la República y defensora de los derechos de los pueblos originarios.</div>
+              </div>
+            </div>
+          </details>
+          <div class="card-links" style="margin-top:14px">
+            <a class="card-link" style="background: var(--cepeda)"
+               href="https://www.movimientopactohistorico.co/docs/programa-gobierno-2026-2030.pdf"
+               target="_blank" rel="noopener noreferrer">📄 Programa oficial (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Abelardo De la Espriella ── -->
+      <div class="candidate-card">
+        <div class="card-header">
+          <div class="avatar" style="background: var(--espriella)">AE</div>
+          <div>
+            <div class="card-name">Abelardo De la Espriella</div>
+            <div class="card-vp">VP fórmula: José Manuel Restrepo</div>
+            <span class="card-party" style="background: var(--espriella)">Defensores de la Patria</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Abogado penalista y figura mediática. Propone mano dura en seguridad con un plan de choque de 90 días y reformas económicas anticorrupción.</p>
+          <details class="profile-accordion">
+            <summary>👤 Ver perfil completo <i class="acc-arrow">▾</i></summary>
+            <div class="profile-section">
+              <div class="profile-label">🎓 Formación</div>
+              <div class="profile-text">Derecho, Universidad Sergio Arboleda. Máster en Derecho, Universidad Sergio Arboleda. Especialista en Ciencias Penales y Criminológicas, Universidad Externado de Colombia.</div>
+            </div>
+            <div class="profile-section">
+              <div class="profile-label">📌 Trayectoria</div>
+              <div class="profile-text">Abogado penalista con más de 22 años de experiencia. Fundó De la Espriella Lawyers en 2002. Ha llevado más de 5.000 procesos, dedicando entre el 25–30% a casos pro bono. Figura mediática de televisión con amplia presencia en medios nacionales.</div>
+            </div>
+            <div class="profile-vp">
+              <div class="vp-header">
+                <div class="vp-avatar" style="background:var(--espriella)">JR</div>
+                <div>
+                  <div class="vp-name">José Manuel Restrepo</div>
+                  <div class="vp-role">Fórmula Vicepresidencial</div>
+                </div>
+              </div>
+              <div class="profile-section">
+                <div class="profile-label">🎓 Formación</div>
+                <div class="profile-text">Economista, Universidad del Rosario. Maestría en Economía, London School of Economics (Reino Unido). Doctorado, Universidad de Bath (Reino Unido).</div>
+              </div>
+              <div class="profile-section" style="margin-bottom:0">
+                <div class="profile-label">📌 Trayectoria</div>
+                <div class="profile-text">Rector de la Universidad del Rosario y de la Universidad EIA. Director del CESA. Ministro de Hacienda y Crédito Público (Gobierno Duque). Ministro de Comercio, Industria y Turismo (Gobierno Duque).</div>
+              </div>
+            </div>
+          </details>
+          <div class="card-links" style="margin-top:14px">
+            <a class="card-link" style="background: var(--espriella)"
+               href="https://defensoresdelapatria.com/wp-content/uploads/2026/04/PROPUESTAS-ABELARDO-DE-LA-ESPRIELLA-EL-TIGRE.pdf"
+               target="_blank" rel="noopener noreferrer">📄 Programa oficial (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Paloma Valencia ── -->
+      <div class="candidate-card">
+        <div class="card-header">
+          <div class="avatar" style="background: var(--paloma)">PV</div>
+          <div>
+            <div class="card-name">Paloma Valencia</div>
+            <div class="card-vp">VP fórmula: Juan Daniel Oviedo</div>
+            <span class="card-party" style="background: var(--paloma)">Gran Consulta por Colombia</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Senadora del Centro Democrático. Ganó la Gran Consulta. Su plan "Colombia Más Grande 2026" tiene 111 medidas en 10 ejes, con énfasis en seguridad y economía.</p>
+          <details class="profile-accordion">
+            <summary>👤 Ver perfil completo <i class="acc-arrow">▾</i></summary>
+            <div class="profile-section">
+              <div class="profile-label">🎓 Formación</div>
+              <div class="profile-text">Derecho y Ciencia Política, Universidad de los Andes. Maestría en Políticas Públicas, Harvard Kennedy School (EE.UU.).</div>
+            </div>
+            <div class="profile-section">
+              <div class="profile-label">📌 Trayectoria</div>
+              <div class="profile-text">Senadora del Centro Democrático desde 2014. Especialista en economía y política pública. Ganó la Gran Consulta por Colombia en marzo de 2026, convirtiéndose en la candidata única del centro-derecha.</div>
+            </div>
+            <div class="profile-vp">
+              <div class="vp-header">
+                <div class="vp-avatar" style="background:var(--paloma)">JO</div>
+                <div>
+                  <div class="vp-name">Juan Daniel Oviedo</div>
+                  <div class="vp-role">Fórmula Vicepresidencial</div>
+                </div>
+              </div>
+              <div class="profile-section">
+                <div class="profile-label">🎓 Formación</div>
+                <div class="profile-text">Economista, Universidad del Rosario. Maestría en Economía Matemática y Econometría. Doctorado en Economía, Universidad de Toulouse (Francia).</div>
+              </div>
+              <div class="profile-section" style="margin-bottom:0">
+                <div class="profile-label">📌 Trayectoria</div>
+                <div class="profile-text">Director del DANE (2018–2022). Profesor y director de la Escuela Doctoral de Economía de la U. del Rosario. Candidato a la Alcaldía de Bogotá 2023 (2° lugar, 616.902 votos).</div>
+              </div>
+            </div>
+          </details>
+          <div class="card-links" style="margin-top:14px">
+            <a class="card-link" style="background: var(--paloma)"
+               href="https://palomapresidente.com.co/images/documentos/Programa%20Integrado%20de%20Gobierno.pdf"
+               target="_blank" rel="noopener noreferrer">📄 Programa oficial (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Roy Barreras ── -->
+      <div class="candidate-card">
+        <div class="card-header">
+          <div class="avatar" style="background: var(--barreras)">RB</div>
+          <div>
+            <div class="card-name">Roy Barreras</div>
+            <div class="card-vp">VP fórmula: Martha Lucía Zamora</div>
+            <span class="card-party" style="background: var(--barreras)">Fuerza por la Paz</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Excanciller y médico oncólogo. Ganó la consulta del Frente por la Vida. Propone un enfoque de paz, reconciliación y transformación energética del país.</p>
+          <details class="profile-accordion">
+            <summary>👤 Ver perfil completo <i class="acc-arrow">▾</i></summary>
+            <div class="profile-section">
+              <div class="profile-label">🎓 Formación</div>
+              <div class="profile-text">Médico cirujano, Universidad del Rosario. Especialización en Oncología Clínica.</div>
+            </div>
+            <div class="profile-section">
+              <div class="profile-label">📌 Trayectoria</div>
+              <div class="profile-text">Oncólogo clínico. Senador de la República durante varios períodos. Canciller de Colombia (Gobierno Petro, 2022–2023). Coordinó mesas de diálogo con el ELN. Ganó la consulta del Frente por la Vida (2026).</div>
+            </div>
+            <div class="profile-vp">
+              <div class="vp-header">
+                <div class="vp-avatar" style="background:var(--barreras)">MZ</div>
+                <div>
+                  <div class="vp-name">Martha Lucía Zamora</div>
+                  <div class="vp-role">Fórmula Vicepresidencial</div>
+                </div>
+              </div>
+              <div class="profile-section">
+                <div class="profile-label">🎓 Formación</div>
+                <div class="profile-text">Abogada, Universidad Externado de Colombia. Especialista en Ciencias Penales y Criminológicas. Estudios complementarios, Universidad de Salamanca (España).</div>
+              </div>
+              <div class="profile-section" style="margin-bottom:0">
+                <div class="profile-label">📌 Trayectoria</div>
+                <div class="profile-text">Magistrada auxiliar de la Corte Constitucional. Fiscal General de la Nación encargada (2012). Directora de la Agencia Nacional de Defensa Jurídica del Estado (Gobierno Petro). Renunció en medio de la controversia por los pasaportes con el canciller Álvaro Leyva.</div>
+              </div>
+            </div>
+          </details>
+          <div class="card-links" style="margin-top:14px">
+            <span class="no-link">⏳ Programa en publicación</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Claudia López ── -->
+      <div class="candidate-card">
+        <div class="card-header">
+          <div class="avatar" style="background: var(--claudia)">CL</div>
+          <div>
+            <div class="card-name">Claudia López</div>
+            <div class="card-vp">VP fórmula: Leonardo Huerta</div>
+            <span class="card-party" style="background: var(--claudia)">Consulta de las Soluciones</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Exalcaldesa de Bogotá y politóloga. Ganó su consulta con más de 600.000 votos. Propone lucha anticorrupción, descentralización regional y generación de empleo.</p>
+          <details class="profile-accordion">
+            <summary>👤 Ver perfil completo <i class="acc-arrow">▾</i></summary>
+            <div class="profile-section">
+              <div class="profile-label">🎓 Formación</div>
+              <div class="profile-text">Ciencia Política, Universidad de los Andes. Maestría y Doctorado en Ciencia Política, Columbia University (EE.UU.).</div>
+            </div>
+            <div class="profile-section">
+              <div class="profile-label">📌 Trayectoria</div>
+              <div class="profile-text">Investigadora pionera en parapolítica. Senadora por la Alianza Verde. Primera mujer electa como Alcaldesa de Bogotá (2020–2024). Ganó la Consulta de las Soluciones en 2026 con más de 600.000 votos.</div>
+            </div>
+            <div class="profile-vp">
+              <div class="vp-header">
+                <div class="vp-avatar" style="background:var(--claudia)">LH</div>
+                <div>
+                  <div class="vp-name">Leonardo Huerta</div>
+                  <div class="vp-role">Fórmula Vicepresidencial</div>
+                </div>
+              </div>
+              <div class="profile-section">
+                <div class="profile-label">🎓 Formación</div>
+                <div class="profile-text">Licenciado en Filosofía, U. Tecnológica de Pereira. Abogado, Universidad Libre. Maestría en Derecho Administrativo. Cinco especializaciones (Derecho Probatorio, Derechos Humanos, DIH, Derecho Administrativo, Constitucional). Candidato a Doctor en Derecho.</div>
+              </div>
+              <div class="profile-section" style="margin-bottom:0">
+                <div class="profile-label">📌 Trayectoria</div>
+                <div class="profile-text">Docente en más de 20 universidades del país. Secretario de Educación de Pereira (impulsó 3 megacolegios, 5 premios del MinEducación). Defensor del Pueblo Delegado para la Salud (hasta enero 2025).</div>
+              </div>
+            </div>
+          </details>
+          <div class="card-links" style="margin-top:14px">
+            <a class="card-link" style="background: var(--claudia)"
+               href="https://claudia-lopez.com/wp-content/uploads/2026/02/Programa-de-Gobierno-Claudia-Lopez.pdf"
+               target="_blank" rel="noopener noreferrer">📄 Programa oficial (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Sergio Fajardo ── -->
+      <div class="candidate-card">
+        <div class="card-header">
+          <div class="avatar" style="background: var(--fajardo)">SF</div>
+          <div>
+            <div class="card-name">Sergio Fajardo</div>
+            <div class="card-vp">VP fórmula: Edna Bonilla</div>
+            <span class="card-party" style="background: var(--fajardo)">Dignidad y Compromiso</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Matemático y exgobernador de Antioquia. Propone "Cambio. Serio. Seguro.": superar la polarización, consolidar las finanzas públicas y transformar Colombia desde el conocimiento y la innovación.</p>
+          <details class="profile-accordion">
+            <summary>👤 Ver perfil completo <i class="acc-arrow">▾</i></summary>
+            <div class="profile-section">
+              <div class="profile-label">🎓 Formación</div>
+              <div class="profile-text">Matemático, Universidad de los Andes. Doctorado en Matemáticas, University of Wisconsin-Madison (EE.UU.).</div>
+            </div>
+            <div class="profile-section">
+              <div class="profile-label">📌 Trayectoria</div>
+              <div class="profile-text">Profesor universitario de matemáticas. Alcalde de Medellín (2004–2007), reconocido globalmente por la transformación urbana y social de la ciudad. Gobernador de Antioquia (2012–2015). Candidato presidencial en 2018 (2° lugar) y 2022.</div>
+            </div>
+            <div class="profile-vp">
+              <div class="vp-header">
+                <div class="vp-avatar" style="background:var(--fajardo)">EB</div>
+                <div>
+                  <div class="vp-name">Edna Bonilla</div>
+                  <div class="vp-role">Fórmula Vicepresidencial</div>
+                </div>
+              </div>
+              <div class="profile-section">
+                <div class="profile-label">🎓 Formación</div>
+                <div class="profile-text">Contadora Pública, Universidad Nacional de Colombia. Especialización en Gerencia de Impuestos, U. Externado. Doctorado en Estudios Políticos, U. Externado. Profesora visitante en Sciences Po (Francia). Más de 50 publicaciones académicas.</div>
+              </div>
+              <div class="profile-section" style="margin-bottom:0">
+                <div class="profile-label">📌 Trayectoria</div>
+                <div class="profile-text">Profesora asociada de Ciencias Económicas, Universidad Nacional. Secretaria de Hábitat de Bogotá (gobierno Garzón, 2007). Secretaria de Educación de Bogotá (2020–2023, gobierno López). Lideró "Jóvenes a la U": +40.000 jóvenes accedieron gratuitamente a educación superior.</div>
+              </div>
+            </div>
+          </details>
+          <div class="card-links" style="margin-top:14px">
+            <a class="card-link" style="background: var(--fajardo)"
+               href="computer:///sessions/sleepy-jolly-bell/mnt/outputs/fajardo-programa-gobierno-2026.pdf"
+               target="_blank" rel="noopener noreferrer">📄 Programa oficial (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /candidates-grid -->
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     COMPARATIVA POR TEMA
+════════════════════════════════════ -->
+<section class="section" style="background: #edf2f7; border-radius: 0;">
+  <div class="container">
+    <h2 class="section-title"><span class="icon">⚖️</span> Comparativa por tema prioritario</h2>
+    <p class="section-sub">Selecciona un eje para ver las propuestas de cada candidato. Las propuestas se extractaron de programas oficiales y declaraciones verificadas por medios de referencia.</p>
+
+    <!-- Tabs -->
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" onclick="showTab('salud', this)" role="tab">❤️‍🩹 Salud</button>
+      <button class="tab-btn" onclick="showTab('educacion', this)" role="tab">📚 Educación</button>
+      <button class="tab-btn" onclick="showTab('seguridad', this)" role="tab">🛡️ Seguridad</button>
+      <button class="tab-btn" onclick="showTab('economia', this)" role="tab">📈 Economía</button>
+      <button class="tab-btn" onclick="showTab('tecnologia', this)" role="tab">💻 Tecnología</button>
+    </div>
+
+    <!-- ── SALUD ── -->
+    <div class="tab-panel active" id="tab-salud">
+      <div class="compare-grid">
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--cepeda)">
+            <div class="mini-avatar">IC</div>
+            <div class="cname">Iván Cepeda — Pacto Histórico</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Sistema de salud preventivo y comunitario con enfoque de atención primaria.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Garantía de acceso universal y gratuito a servicios esenciales de salud.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Fortalecimiento de hospitales y clínicas públicas en territorios rurales.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante reforma legislativa al modelo de salud pública y reorganización hacia atención primaria, con mayor presupuesto para hospitales del Estado. El programa plantea una transformación estructural, pero no especifica plazos ni mecanismos concretos de financiación.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--cepeda)" href="https://www.movimientopactohistorico.co/docs/programa-gobierno-2026-2030.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--espriella)">
+            <div class="mini-avatar">AE</div>
+            <div class="cname">Abelardo De la Espriella</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Plan de choque de 10 billones de pesos en los primeros 90 días para garantizar atención y pago de deudas a médicos.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Entrega directa de medicamentos a domicilio para pacientes con enfermedades crónicas.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Uso de IA y blockchain para transparencia financiera del sistema; 1.5 billones para tratamientos oncológicos y enfermedades raras.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante decreto presidencial de emergencia en salud desde el primer día; movilización de 10 billones del presupuesto nacional; contratos directos con distribuidoras farmacéuticas para entrega a domicilio; e implementación de plataforma con blockchain para trazabilidad de recursos y pagos.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--espriella)" href="https://www.infobae.com/colombia/2026/02/08/abelardo-de-la-espriella-propone-plan-de-choque-de-10-billones-para-estabilizar-la-salud-en-colombia-en-90-dias/" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--paloma)">
+            <div class="mini-avatar">PV</div>
+            <div class="cname">Paloma Valencia — Colombia Más Grande</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Comando Unificado Permanente desde la Presidencia para intervención directa en la crisis de salud.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Saneamiento financiero: pago de deudas a hospitales y EPS que cumplan con sus compromisos.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Expansión de telemedicina en zonas rurales y municipios apartados.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">A través del Comando Unificado con facultades ejecutivas directas sobre el sistema; auditorías a EPS y hospitales para liberar pagos represados; y contratos con operadores de telemedicina habilitados por el Ministerio de Salud en municipios sin cobertura.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--paloma)" href="https://palomapresidente.com.co/images/documentos/Programa%20Integrado%20de%20Gobierno.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--barreras)">
+            <div class="mini-avatar">RB</div>
+            <div class="cname">Roy Barreras — Fuerza por la Paz</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--barreras)"></div>Priorización de tecnología para mejorar servicios de salud y eficiencia del sistema.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--barreras)"></div>Enfoque en acceso rural y comunitario como médico de formación.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text no-info">⚠️ El programa no menciona directamente cómo lo resolvería. Programa completo pendiente de publicación.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--claudia)">
+            <div class="mini-avatar">CL</div>
+            <div class="cname">Claudia López — Las Soluciones</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Tecnología para estandarizar precios de medicamentos y servicios por región y nivel de riesgo.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Descentralización del sistema hacia regiones con mayor autonomía de planificación.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante reforma regulatoria al sistema de información de salud, implementación de plataformas digitales de datos y estandarización de precios por resolución ministerial; descentralización vía reforma al Sistema General de Participaciones (SGP).</p>
+            </div>
+            <a class="sources-tag" style="background:var(--claudia)" href="https://claudia-lopez.com/wp-content/uploads/2026/02/Programa-de-Gobierno-Claudia-Lopez.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--fajardo)">
+            <div class="mini-avatar">SF</div>
+            <div class="cname">Sergio Fajardo — Dignidad y Compromiso</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Puesto de Mando Presidencial en los primeros 100 días para atender la crisis del sistema de salud.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Reforma financiera: auditorías a EPS y UPC técnica actualizada según costos reales.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Modelo territorializado de Atención Primaria en Salud (APS) con equipos en territorios.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Salud Digital: telemedicina, historia clínica única e interoperabilidad de sistemas.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Estrategia nacional de Salud Mental.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Articulación entre Min Salud, Fiscalía, UIAF y Superintendencia para auditar EPS en los primeros 100 días. La reforma de la UPC se haría con metodología técnica para actualizar tarifas según costos reales. La APS se implementaría vía equipos territoriales de salud financiados con recursos del sistema. La Salud Digital requiere inversión en conectividad e integración tecnológica de todos los actores del sistema.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--fajardo)" href="computer:///sessions/sleepy-jolly-bell/mnt/outputs/fajardo-programa-gobierno-2026.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-salud -->
+
+    <!-- ── EDUCACIÓN ── -->
+    <div class="tab-panel" id="tab-educacion">
+      <div class="compare-grid">
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--cepeda)">
+            <div class="mini-avatar">IC</div>
+            <div class="cname">Iván Cepeda — Pacto Histórico</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Educación pública gratuita y de calidad desde primera infancia hasta educación superior.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Fortalecimiento de la educación en territorios rurales y comunidades étnicas.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Ampliación de becas y subsidios para acceso a universidades públicas.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante reforma presupuestal que incremente las transferencias a instituciones educativas públicas y legislación de gratuidad progresiva. El programa no detalla fuentes de financiación ni plazos específicos de implementación.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--cepeda)" href="https://www.movimientopactohistorico.co/docs/programa-gobierno-2026-2030.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--espriella)">
+            <div class="mini-avatar">AE</div>
+            <div class="cname">Abelardo De la Espriella</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Énfasis en inteligencia artificial e innovación tecnológica en el currículo escolar.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Créditos educativos amplios para acceso a educación superior y técnica.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Inversión privada en ciencia, tecnología e innovación como eje del desarrollo educativo.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante ley de inversión privada en CTI, reforma al sistema de créditos del ICETEX y alianzas empresa-escuela-tecnología para incorporar IA al aula. El programa no especifica la fuente de financiación para los créditos educativos.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--espriella)" href="https://defensoresdelapatria.com/wp-content/uploads/2026/04/PROPUESTAS-ABELARDO-DE-LA-ESPRIELLA-EL-TIGRE.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--paloma)">
+            <div class="mini-avatar">PV</div>
+            <div class="cname">Paloma Valencia — Colombia Más Grande</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Ampliar cobertura educativa con énfasis en ruralidad y territorios vulnerables.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Reforma integral del ICETEX para reducir la carga de deuda estudiantil.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Formación dual: acuerdos entre colegios/universidades y el sector productivo.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>IA en el aula como herramienta para reducir la brecha de calidad educativa.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">A través de reforma legislativa al ICETEX, convenios formales entre instituciones educativas y empresas del sector productivo (modelo de formación dual), y dotación de dispositivos con conectividad en colegios públicos priorizados por índice de pobreza.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--paloma)" href="https://palomapresidente.com.co/images/documentos/Programa%20Integrado%20de%20Gobierno.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--barreras)">
+            <div class="mini-avatar">RB</div>
+            <div class="cname">Roy Barreras — Fuerza por la Paz</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--barreras)"></div>Educación para la paz y reconciliación como eje transversal del currículo.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text no-info">⚠️ El programa no menciona directamente cómo lo resolvería. Propuestas educativas detalladas pendientes de publicación.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--claudia)">
+            <div class="mini-avatar">CL</div>
+            <div class="cname">Claudia López — Las Soluciones</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Fortalecer la educación pública como herramienta de equidad social.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Descentralización educativa hacia modelos regionales más autónomos.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Generación de empleo ligada a formación técnica y vocacional territorial.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante reforma al modelo de descentralización educativa, creación de fondos regionales de educación con mayor autonomía departamental y convenios con el sector privado para formación técnica orientada a las necesidades productivas de cada región.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--claudia)" href="https://claudia-lopez.com/wp-content/uploads/2026/02/Programa-de-Gobierno-Claudia-Lopez.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--fajardo)">
+            <div class="mini-avatar">SF</div>
+            <div class="cname">Sergio Fajardo — Dignidad y Compromiso</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Cuidado integral para primera infancia (0-5 años): más jardines y centros de atención, priorizando territorios rurales y vulnerables.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Enfoque STEAM en colegios: ciencia, tecnología, ingeniería, artes y matemáticas con laboratorios y uso pedagógico de IA.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Matemáticas como proyecto nacional: guías estandarizadas, docentes especializados y nube nacional de matemáticas.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Transformar el SENA: +150.000 estudiantes; recuperar el Icetex con becas y créditos contingentes al ingreso.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Infraestructura educativa digna: aulas, bibliotecas, laboratorios, conectividad digital en todas las instituciones.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">A través de tres ejes estratégicos: (1) trayectorias educativas completas desde primera infancia hasta educación superior; (2) sistema de educación superior integrado con trayectorias formativas flexibles y modelos dual (estudio + práctica laboral); (3) instituciones educativas como comunidades de aprendizaje y bienestar, promoviendo salud mental escolar, etnoeducación y educación inclusiva. La financiación se orienta a territorios rurales y poblaciones vulnerables.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--fajardo)" href="computer:///sessions/sleepy-jolly-bell/mnt/outputs/fajardo-programa-gobierno-2026.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-educacion -->
+
+    <!-- ── SEGURIDAD ── -->
+    <div class="tab-panel" id="tab-seguridad">
+      <div class="compare-grid">
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--cepeda)">
+            <div class="mini-avatar">IC</div>
+            <div class="cname">Iván Cepeda — Pacto Histórico</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Continuidad del enfoque de "Paz Total": diálogos con grupos armados como instrumento central.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Inversión social en territorios de conflicto como estrategia de seguridad estructural.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Reforma al sistema de justicia para garantizar verdad, justicia y reparación.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante mesas de diálogo formales con grupos armados con cese al fuego bilateral como punto de partida, y reorientación del gasto público hacia inversión social en zonas de conflicto. El programa no especifica qué mecanismos se activarían si los grupos rechazan la negociación.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--cepeda)" href="https://www.movimientopactohistorico.co/docs/programa-gobierno-2026-2030.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--espriella)">
+            <div class="mini-avatar">AE</div>
+            <div class="cname">Abelardo De la Espriella</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Plan de 90 días para recuperar el control territorial con presencia total de la Fuerza Pública.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Erradicación de 330.000 ha de coca: fumigación aérea, erradicación manual y sustitución.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Extradición activa de jefes del crimen y creación de Fuerza de Tarea contra la Extorsión.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">A través de decreto presidencial desde el primer día de gobierno, movilización inmediata de la Fuerza Pública a territorios críticos, coordinación con la DEA y agencias internacionales para extradiciones, y creación de unidades especializadas por ley.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--espriella)" href="https://www.infobae.com/colombia/2026/04/09/abelardo-de-la-espriella-promete-mano-dura-este-es-el-plan-para-recuperar-la-seguridad-de-colombia-en-90-dias/" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--paloma)">
+            <div class="mini-avatar">PV</div>
+            <div class="cname">Paloma Valencia — Colombia Más Grande</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Fortalecer la Fuerza Pública con más recursos, personal y presencia en zonas de conflicto.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Inteligencia y tecnología para combatir el crimen organizado y el narcotráfico.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Reforma judicial para reducir la impunidad y acelerar procesos penales.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante aumento del presupuesto de Defensa y Policía, reforma al Código Penal para endurecer penas, alianzas de inteligencia con países aliados y modernización tecnológica de las Fuerzas Militares. La reforma judicial requeriría trámite legislativo en el Congreso.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--paloma)" href="https://palomapresidente.com.co/images/documentos/Programa%20Integrado%20de%20Gobierno.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--barreras)">
+            <div class="mini-avatar">RB</div>
+            <div class="cname">Roy Barreras — Fuerza por la Paz</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--barreras)"></div>Paz y reconciliación como base de la seguridad duradera.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--barreras)"></div>Diálogos humanitarios y acuerdos territoriales con grupos armados.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text no-info">⚠️ El programa no menciona directamente cómo lo resolvería. No detalla qué mecanismos se activarían frente a grupos que rechacen la negociación.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--claudia)">
+            <div class="mini-avatar">CL</div>
+            <div class="cname">Claudia López — Las Soluciones</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Lucha contra la corrupción como causa estructural de la inseguridad.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Alianzas con gobernadores y alcaldes para estrategias de seguridad territorial.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Reforma a la Policía Nacional con énfasis en proximidad y servicio ciudadano.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante reforma institucional a la Policía por vía legislativa, pactos regionales formalizados con entes territoriales y acción penal reforzada de la Fiscalía contra estructuras de corrupción que financian el crimen organizado.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--claudia)" href="https://claudia-lopez.com/wp-content/uploads/2026/02/Programa-de-Gobierno-Claudia-Lopez.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--fajardo)">
+            <div class="mini-avatar">SF</div>
+            <div class="cname">Sergio Fajardo — Dignidad y Compromiso</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Plan Guardián: +40.000 nuevos policías e inversión en inteligencia criminal.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Desmantelar las finanzas del crimen organizado (Fiscalía + UIAF + FF.MM.) en los primeros 100 días.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Plan Nacional contra la extorsión y el secuestro: duplicar el GAULA.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Reforma carcelaria: 5 nuevas cárceles con enfoque de resocialización.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Planes territoriales específicos para Catatumbo, Cauca y Chocó; protección de jóvenes en riesgo.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">En los primeros 100 días activará una mesa interinstitucional (Fiscalía + UIAF + FF.MM.) para atacar el financiamiento del crimen. El GAULA se duplicará con presupuesto dedicado. La reforma carcelaria se ejecutará con inversión específica para 5 nuevas cárceles. Los planes territoriales para Catatumbo, Cauca y Chocó incluyen presencia estatal coordinada con enfoque de desarrollo y seguridad simultáneos.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--fajardo)" href="computer:///sessions/sleepy-jolly-bell/mnt/outputs/fajardo-programa-gobierno-2026.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-seguridad -->
+
+    <!-- ── ECONOMÍA ── -->
+    <div class="tab-panel" id="tab-economia">
+      <div class="compare-grid">
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--cepeda)">
+            <div class="mini-avatar">IC</div>
+            <div class="cname">Iván Cepeda — Pacto Histórico</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Ley de Austeridad Republicana: reducir gasto gubernamental y reorientarlo hacia bienestar social.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Economía popular y comunitaria como motor de desarrollo local.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Reforma fiscal progresiva que priorice la inversión pública social.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante un proyecto de ley de austeridad presentado al Congreso para reasignación presupuestal, y una reforma tributaria progresiva que aumente el recaudo de sectores de mayores ingresos y patrimonios. El programa no detalla los sectores específicos de recorte ni los plazos de transición.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--cepeda)" href="https://cambiocolombia.com/elecciones-colombia-2026/articulo/2026/2/propuestas-candidatos-presidenciales-reducir-gasto-estatal-salario-minimos-fusion-ministerios/" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--espriella)">
+            <div class="mini-avatar">AE</div>
+            <div class="cname">Abelardo De la Espriella</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Tecnología para identificar empresas fachada y estructuras de lavado de activos.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Anticorrupción como pilar central de la política económica.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Fusión de entidades públicas para reducir burocracia y gasto del Estado.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">A través de plataformas de análisis financiero coordinadas con la UIAF (Unidad de Información y Análisis Financiero), reforma al sistema de contratación pública y decreto de modernización del Estado para fusionar entidades. El programa no especifica qué entidades fusionaría ni la fuente de ahorro proyectada.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--espriella)" href="https://defensoresdelapatria.com/wp-content/uploads/2026/04/PROPUESTAS-ABELARDO-DE-LA-ESPRIELLA-EL-TIGRE.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--paloma)">
+            <div class="mini-avatar">PV</div>
+            <div class="cname">Paloma Valencia — Colombia Más Grande</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Recuperar la confianza de inversionistas y alcanzar un crecimiento del 5% del PIB.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Simplificación tributaria y reducción de cargas al sector productivo.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Fusión de 6 ministerios y eliminación de 7 entidades para reducir gasto estatal.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante reforma tributaria simplificadora vía proyecto de ley al Congreso, ley de modernización del Estado para fusionar ministerios, y negociaciones directas con inversionistas para garantizar estabilidad jurídica. Propone mesas de trabajo con el sector privado en los primeros 100 días.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--paloma)" href="https://palomapresidente.com.co/images/documentos/Programa%20Integrado%20de%20Gobierno.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--barreras)">
+            <div class="mini-avatar">RB</div>
+            <div class="cname">Roy Barreras — Fuerza por la Paz</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--barreras)"></div>Gas natural como fuente estratégica para prevenir apagones y garantizar seguridad energética.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--barreras)"></div>Tasa de solidaridad de 3 pesos/kWh por 36 meses para capitalizar el sistema eléctrico (1.5 billones).</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">A través de legislación que crea la tasa solidaria en la factura de servicios públicos, renegociación de contratos energéticos del gobierno con las empresas del sector, y plan de inversión en energías limpias financiado con esos recursos. El programa no menciona directamente cómo abordaría la política fiscal general.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--claudia)">
+            <div class="mini-avatar">CL</div>
+            <div class="cname">Claudia López — Las Soluciones</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Generación de empleo formal como objetivo económico central.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Alianzas público-privadas con gobiernos locales para desarrollo regional.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Anticorrupción como mecanismo de recuperación de recursos para inversión social.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante contratos público-privados formalizados, fondos de desarrollo regional descentralizados y persecución penal reforzada de la Fiscalía contra estructuras de corrupción. El programa no especifica metas de empleo ni fuentes de financiación de los fondos regionales.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--claudia)" href="https://claudia-lopez.com/wp-content/uploads/2026/02/Programa-de-Gobierno-Claudia-Lopez.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--fajardo)">
+            <div class="mini-avatar">SF</div>
+            <div class="cname">Sergio Fajardo — Dignidad y Compromiso</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Plan de consolidación fiscal: reducir déficit y modernizar la DIAN con analítica de datos para combatir la evasión.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Reconversión tecnológica para 120.000 empresas (replicando el modelo CEDEZOs de Medellín a escala nacional).</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Crédito productivo para 150.000 empresas con tasas preferenciales orientadas a inversión tecnológica y empleo formal.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Colombia Coinvierte: movilizar USD 1.000 millones en capital de crecimiento vía coinversión público-privada.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Reducir trámites empresariales en 50% y digitalizar procesos; estabilizar 1 millón de trabajadores de economía popular.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Replicando el modelo de los CEDEZOs de Medellín a escala nacional: centros de desarrollo empresarial con asistencia técnica y financiamiento en barrios y territorios. Colombia Coinvierte movilizará capital privado sin que el Estado asuma participación accionaria en las empresas. La DIAN moderna usará tecnología y analítica de datos para reducir la evasión. Los 10.000 trámites eliminados se digitalizarán para que emprender sea más rápido y predecible.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--fajardo)" href="computer:///sessions/sleepy-jolly-bell/mnt/outputs/fajardo-programa-gobierno-2026.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-economia -->
+
+    <!-- ── TECNOLOGÍA ── -->
+    <div class="tab-panel" id="tab-tecnologia">
+      <div class="compare-grid">
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--cepeda)">
+            <div class="mini-avatar">IC</div>
+            <div class="cname">Iván Cepeda — Pacto Histórico</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Democratización del acceso a internet y tecnología en territorios rurales y comunidades vulnerables.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--cepeda)"></div>Tecnología como herramienta de transparencia en la gestión pública.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text no-info">⚠️ El programa no menciona directamente cómo lo resolvería. No especifica mecanismos concretos de inversión en infraestructura digital ni una agenda de transformación tecnológica del Estado.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--cepeda)" href="https://www.movimientopactohistorico.co/docs/programa-gobierno-2026-2030.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--espriella)">
+            <div class="mini-avatar">AE</div>
+            <div class="cname">Abelardo De la Espriella</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>IA y blockchain en el sistema de salud para transparencia y trazabilidad de recursos.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>IA como eje del currículo educativo y formación para el trabajo del futuro.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--espriella)"></div>Inversión privada en CTI como motor del desarrollo económico y anticorrupción.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">A través de alianzas con empresas tecnológicas privadas nacionales e internacionales, ley de incentivos a la inversión privada en CTI y adaptación de plataformas blockchain e IA al sector público. El programa no especifica los proveedores ni el proceso de contratación y auditoría de dichas plataformas.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--espriella)" href="https://defensoresdelapatria.com/wp-content/uploads/2026/04/PROPUESTAS-ABELARDO-DE-LA-ESPRIELLA-EL-TIGRE.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--paloma)">
+            <div class="mini-avatar">PV</div>
+            <div class="cname">Paloma Valencia — Colombia Más Grande</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>IA en el aula como herramienta para reducir la inequidad educativa.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Inteligencia tecnológica aplicada al combate del crimen organizado.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--paloma)"></div>Telemedicina como solución tecnológica para la salud en zonas rurales.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante dotación de dispositivos con conectividad en colegios públicos priorizados, contratos con operadores de telemedicina certificados por el Ministerio de Salud, y modernización de las capacidades de inteligencia de la Fuerza Pública. El programa no detalla una agenda digital integral para el Estado.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--paloma)" href="https://palomapresidente.com.co/images/documentos/Programa%20Integrado%20de%20Gobierno.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--barreras)">
+            <div class="mini-avatar">RB</div>
+            <div class="cname">Roy Barreras — Fuerza por la Paz</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--barreras)"></div>Tecnología para modernizar los servicios de salud y el sistema eléctrico.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text no-info">⚠️ El programa no menciona directamente cómo lo resolvería. No hay una hoja de ruta digital publicada para el gobierno de Barreras.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--claudia)">
+            <div class="mini-avatar">CL</div>
+            <div class="cname">Claudia López — Las Soluciones</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Leyes modernas de protección de datos y ciberseguridad nacional.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Sandboxes regulatorios para fomentar la innovación tecnológica en sectores clave.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--claudia)"></div>Tecnología en salud para estandarizar precios y transparentar datos por región.</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">Mediante nueva legislación de datos personales y ciberseguridad tramitada en el Congreso, creación de sandboxes regulatorios por resolución de los ministerios sectoriales, y plataformas digitales de transparencia de datos de salud y servicios públicos de gestión gubernamental.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--claudia)" href="https://www.tecnogus.com.co/futuro-digital-colombia-propuestas-presidenciales/" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-card-header" style="background: var(--fajardo)">
+            <div class="mini-avatar">SF</div>
+            <div class="cname">Sergio Fajardo — Dignidad y Compromiso</div>
+          </div>
+          <div class="compare-card-body">
+            <div class="what-block">
+              <span class="block-label">📋 Qué propone</span>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Instituto Nacional de Inteligencia Artificial y Ciencia de Datos (inspirado en CENIA de Chile) para liderar investigación avanzada y adopción responsable de IA.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Estado Digital 2030: servicios 100% digitales, conectividad total (fibra óptica, 5G, centros de datos) y Cuerpo Nacional Digital.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Colombia hub regional de tecnología: ecosistemas fintech, govtech, agrotech y startups de alto impacto ("unicornios").</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Plan Nacional de Talento Digital: formación masiva en programación, datos e IA; olimpiadas nacionales de IA y becas para carreras tecnológicas.</div>
+              <div class="proposal-item"><div class="proposal-dot" style="background:var(--fajardo)"></div>Agenda Nacional de Bioeconomía y Biotecnología; Programa de Innovación para Energías Limpias (hidrógeno verde, solar, eólica).</div>
+            </div>
+            <div class="how-block">
+              <span class="block-label">🔧 Cómo lo haría</span>
+              <p class="how-text">A través de tres ejes: (1) fortalecer la gobernanza del Sistema Nacional de CTI simplificando su arquitectura institucional y creando una red de institutos públicos de investigación; (2) acelerar la transformación digital del Estado expandiendo conectividad y digitalizando servicios; (3) convertir la IA y el talento digital en motores de productividad, promoviendo su adopción responsable en pymes, emprendedores y regiones. El Instituto de IA operará con ciencia abierta y uso responsable de datos.</p>
+            </div>
+            <a class="sources-tag" style="background:var(--fajardo)" href="computer:///sessions/sleepy-jolly-bell/mnt/outputs/fajardo-programa-gobierno-2026.pdf" target="_blank" rel="noopener">Programa Oficial</a>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-tecnologia -->
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     CÓMO PARTICIPAR
+════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="icon">🗳️</span> ¿Cómo participar en las elecciones?</h2>
+    <p class="section-sub">Información práctica para ejercer tu derecho al voto.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;">
+
+      <div style="background:#fff; border-radius:12px; padding:20px; border:1px solid var(--border); box-shadow:var(--shadow);">
+        <div style="font-size:32px;margin-bottom:8px;">📋</div>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;">¿Estoy inscrito?</h3>
+        <p style="font-size:13px;color:#4a5568;margin-bottom:10px;">Verifica tu cédula en la Registraduría Nacional.</p>
+        <a href="https://wapp.registraduria.gov.co/electoral/2026/presidente-de-la-republica/" target="_blank" rel="noopener"
+           style="font-size:12px;font-weight:600;color:#1a56db;text-decoration:none;">→ Consultar en Registraduría</a>
+      </div>
+
+      <div style="background:#fff; border-radius:12px; padding:20px; border:1px solid var(--border); box-shadow:var(--shadow);">
+        <div style="font-size:32px;margin-bottom:8px;">📅</div>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;">Fechas clave 2026</h3>
+        <p style="font-size:13px;color:#4a5568;">🗓 <strong>31 mayo</strong>: Primera vuelta<br>🗓 <strong>21 junio</strong>: Segunda vuelta (si aplica)</p>
+      </div>
+
+      <div style="background:#fff; border-radius:12px; padding:20px; border:1px solid var(--border); box-shadow:var(--shadow); grid-column: 1 / -1;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <span style="font-size:28px;">📺</span>
+          <div>
+            <h3 style="font-size:15px;font-weight:700;margin:0;">Debates presidenciales 2026</h3>
+            <p style="font-size:12px;color:#6b7280;margin:2px 0 0;">Todos los debates realizados y programados hacia la primera vuelta del 31 de mayo</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+
+          <!-- 18 MAY 2026 — PRÓXIMO -->
+          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:10px 14px;background:#fffbeb;border-radius:8px;border-left:3px solid #f59e0b;border:1px dashed #fde68a;">
+            <span style="font-size:20px;">📅</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#92400e;">Gran Debate Presidencial — Telepacífico</div>
+              <div style="font-size:11.5px;color:#92400e;margin-top:2px;">18 may 2026 · ProPacífico + Telepacífico, universidades del Valle · Todos los candidatos · Cartagena, transmisión nacional</div>
+            </div>
+            <span style="font-size:11px;font-weight:600;color:#92400e;background:#fde68a;padding:5px 10px;border-radius:6px;white-space:nowrap;">Próximo</span>
+          </div>
+
+          <!-- 16 ABR 2026 -->
+          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:10px 14px;background:#f8fafc;border-radius:8px;border-left:3px solid #059669;">
+            <span style="font-size:20px;">⚡</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#111827;">"Colombia Decide su Energía" — Noticias Caracol · Congreso Naturgas</div>
+              <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">16 abr 2026 · Cartagena · Paloma Valencia, Sergio Fajardo, Claudia López, Roy Barreras · Tema: crisis energética y precios Costa Caribe</div>
+            </div>
+            <a href="https://www.youtube.com/watch?v=rWBz4lhmtx4" target="_blank" rel="noopener"
+               style="font-size:11px;font-weight:600;color:#fff;background:#dc2626;padding:5px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;">▶ Ver</a>
+          </div>
+
+          <!-- 24 MAR 2026 -->
+          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:10px 14px;background:#f8fafc;border-radius:8px;border-left:3px solid #2563eb;">
+            <span style="font-size:20px;">🎙️</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#111827;">Debate El Espectador + Universidades</div>
+              <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">24 mar 2026 · U. de los Andes, U. Nacional, Dejusticia, Oxfam · Paloma Valencia, Claudia López, Roy Barreras, Luis G. Murillo</div>
+            </div>
+            <a href="https://www.elespectador.com/politica/elecciones-colombia-2026/debate-presidencial-2026-estas-son-las-propuestas-de-los-candidatos-paloma-valencia-claudia-lopez-roy-barreras-y-luis-gilberto-murillo/" target="_blank" rel="noopener"
+               style="font-size:11px;font-weight:600;color:#fff;background:#2563eb;padding:5px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;">▶ Ver</a>
+          </div>
+
+          <!-- 25 ENE 2026 -->
+          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:10px 14px;background:#f8fafc;border-radius:8px;border-left:3px solid #d97706;">
+            <span style="font-size:20px;">🎙️</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#111827;">"El Debate de la Gente" — Gran Consulta por Colombia</div>
+              <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">25 ene 2026 · El Tiempo, RCN, Citytv, La FM · Paloma Valencia, J. D. Oviedo, J. M. Galán, Vicky Dávila y 5 más</div>
+            </div>
+            <a href="https://www.youtube.com/watch?v=c98I2A00wbA" target="_blank" rel="noopener"
+               style="font-size:11px;font-weight:600;color:#fff;background:#dc2626;padding:5px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;">▶ Ver</a>
+          </div>
+
+          <div style="text-align:center;padding-top:6px;">
+            <a href="https://www.youtube.com/playlist?list=PLazv5nJTMUQbdkNLThFmayKPVOCdNXnA5" target="_blank" rel="noopener"
+               style="font-size:12px;font-weight:600;color:#dc2626;text-decoration:none;">▶ Ver playlist completa de debates en YouTube (Noticias Caracol) →</a>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="background:#fff; border-radius:12px; padding:20px; border:1px solid var(--border); box-shadow:var(--shadow);">
+        <div style="font-size:32px;margin-bottom:8px;">🔍</div>
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;">Verificación de datos</h3>
+        <p style="font-size:13px;color:#4a5568;margin-bottom:10px;">Consulta fact-checkers independientes antes de compartir información.</p>
+        <a href="https://www.colombiacheck.com/" target="_blank" rel="noopener"
+           style="font-size:12px;font-weight:600;color:#1a56db;text-decoration:none;">→ ColombiaCheck</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     FOOTER
+════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Programas oficiales</h4>
+      <a href="https://www.movimientopactohistorico.co/docs/programa-gobierno-2026-2030.pdf" target="_blank" rel="noopener">Iván Cepeda — Pacto Histórico (PDF)</a>
+      <a href="https://defensoresdelapatria.com/wp-content/uploads/2026/04/PROPUESTAS-ABELARDO-DE-LA-ESPRIELLA-EL-TIGRE.pdf" target="_blank" rel="noopener">Abelardo De la Espriella (PDF)</a>
+      <a href="https://palomapresidente.com.co/images/documentos/Programa%20Integrado%20de%20Gobierno.pdf" target="_blank" rel="noopener">Paloma Valencia — Programa Integrado (PDF)</a>
+      <a href="https://claudia-lopez.com/wp-content/uploads/2026/02/Programa-de-Gobierno-Claudia-Lopez.pdf" target="_blank" rel="noopener">Claudia López (PDF)</a>
+      <a href="computer:///sessions/sleepy-jolly-bell/mnt/outputs/fajardo-programa-gobierno-2026.pdf" target="_blank" rel="noopener">Sergio Fajardo — Cambio. Serio. Seguro. (PDF oficial)</a>
+    </div>
+    <div class="footer-col">
+      <h4>Fuentes de referencia</h4>
+      <a href="https://www.registraduria.gov.co/14-candidatos-se-inscribieron-para-las-elecciones-presidenciales-de-2026.html" target="_blank" rel="noopener">Registraduría Nacional</a>
+      <a href="https://es.wikipedia.org/wiki/Elecciones_presidenciales_de_Colombia_de_2026" target="_blank" rel="noopener">Wikipedia: Elecciones 2026</a>
+      <a href="https://cambiocolombia.com/elecciones-colombia-2026/articulo/2026/3/propuestas-candidatos-presidenciales-tarifas-energia-educacion-superior-reforma-justicia/" target="_blank" rel="noopener">Cambio Colombia — Propuestas</a>
+      <a href="https://llyc.global/wp-content/uploads/2026/02/Escenarios-de-Gobierno_LLYC_IDEAS.pdf" target="_blank" rel="noopener">LLYC — Escenarios de gobierno (PDF)</a>
+      <a href="https://www.pares.com.co/elecciones-colombia-2026/" target="_blank" rel="noopener">Pares — Análisis electoral</a>
+    </div>
+  </div>
+  <hr class="footer-divider" />
+  <p class="footer-note">
+    🇨🇴 <strong style="color:rgba(255,255,255,.6)">Colombia Decide 2026</strong> — Recurso informativo independiente. No tiene filiación política ni recibe financiación de campañas. Última actualización: abril 2026. Los programas de gobierno son documentos en evolución; se recomienda consultar siempre las fuentes oficiales de cada candidato.
+  </p>
+</footer>
+
+<!-- ── Scripts ── -->
+<script>
+  /* Countdown */
+  function updateCountdown() {
+    const target = new Date('2026-05-31T08:00:00-05:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-minutes').textContent = '0';
+      document.getElementById('cd-seconds').textContent = '0';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-minutes').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-seconds').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* Tabs */
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
