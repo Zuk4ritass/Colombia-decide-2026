@@ -611,6 +611,9 @@
       .hero { padding: 36px 16px 28px; }
       .tab-btn { padding: 8px 12px; font-size: 12.5px; }
     }
+    @media (max-width: 720px) {
+      .cards-3col { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>
@@ -1632,89 +1635,91 @@
     </div>
     <p class="section-sub">Información práctica para ejercer tu derecho al voto.</p>
 
-    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;">
-
-      <div style="background:#fff; padding:20px; border:1px solid var(--border);">
-        <div style="font-size:32px;margin-bottom:8px;">📋</div>
-        <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;">¿Estoy inscrito?</h3>
-        <p style="font-size:13px;color:#4a5568;margin-bottom:10px;">Verifica tu cédula en la Registraduría Nacional.</p>
-        <a href="https://wapp.registraduria.gov.co/electoral/2026/presidente-de-la-republica/" target="_blank" rel="noopener"
-           style="font-size:12px;font-weight:600;color:#1a56db;text-decoration:none;">→ Consultar en Registraduría</a>
+    <!-- ── DEBATES (bloque completo, ancho total) ── -->
+    <div style="background:#fff; padding:24px; border:1px solid var(--border); margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);">
+        <span style="font-size:28px;">📺</span>
+        <div>
+          <h3 style="font-family:'Libre Baskerville',Georgia,serif;font-size:17px;font-weight:700;margin:0;">Debates presidenciales 2026</h3>
+          <p style="font-family:'Source Sans 3',Arial,sans-serif;font-size:13px;color:#6b7280;margin:3px 0 0;">Todos los debates realizados y programados hacia la primera vuelta del 31 de mayo</p>
+        </div>
       </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
 
-      <div style="background:#fff; padding:20px; border:1px solid var(--border);">
-        <div style="font-size:32px;margin-bottom:8px;">📅</div>
-        <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;">Fechas clave 2026</h3>
-        <p style="font-size:13px;color:#4a5568;">🗓 <strong>31 mayo</strong>: Primera vuelta<br>🗓 <strong>21 junio</strong>: Segunda vuelta (si aplica)</p>
-      </div>
-
-      <div style="background:#fff; padding:20px; border:1px solid var(--border); grid-column: 1 / -1;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-          <span style="font-size:28px;">📺</span>
+        <!-- 18 MAY 2026 — PRÓXIMO -->
+        <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:12px 16px;background:#fffbeb;border-left:3px solid #f59e0b;border:1px dashed #fde68a;">
+          <div style="font-family:'Libre Baskerville',Georgia,serif;font-size:11px;font-weight:700;text-align:center;line-height:1.2;color:#92400e;min-width:28px;">18<br>MAY</div>
           <div>
-            <h3 style="font-family:'Libre Baskerville',Georgia,serif;font-size:15px;font-weight:700;margin:0;">Debates presidenciales 2026</h3>
-            <p style="font-size:12px;color:#6b7280;margin:2px 0 0;">Todos los debates realizados y programados hacia la primera vuelta del 31 de mayo</p>
+            <div style="font-family:'Libre Baskerville',Georgia,serif;font-size:13.5px;font-weight:700;color:#92400e;">Gran Debate Presidencial — Telepacífico</div>
+            <div style="font-family:'Source Sans 3',Arial,sans-serif;font-size:12px;color:#92400e;margin-top:3px;">ProPacífico + Telepacífico, universidades del Valle · Todos los candidatos · transmisión nacional</div>
           </div>
+          <span style="font-family:'Source Sans 3',Arial,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#92400e;background:#fde68a;padding:5px 10px;white-space:nowrap;">Próximo</span>
         </div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
 
-          <!-- 18 MAY 2026 — PRÓXIMO -->
-          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:10px 14px;background:#fffbeb;border-radius:8px;border-left:3px solid #f59e0b;border:1px dashed #fde68a;">
-            <span style="font-size:20px;">📅</span>
-            <div>
-              <div style="font-size:13px;font-weight:700;color:#92400e;">Gran Debate Presidencial — Telepacífico</div>
-              <div style="font-size:11.5px;color:#92400e;margin-top:2px;">18 may 2026 · ProPacífico + Telepacífico, universidades del Valle · Todos los candidatos · Cartagena, transmisión nacional</div>
-            </div>
-            <span style="font-size:11px;font-weight:600;color:#92400e;background:#fde68a;padding:5px 10px;border-radius:6px;white-space:nowrap;">Próximo</span>
+        <!-- 16 ABR 2026 -->
+        <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:12px 16px;background:#f9f8f4;border-left:3px solid #059669;">
+          <div style="font-family:'Libre Baskerville',Georgia,serif;font-size:11px;font-weight:700;text-align:center;line-height:1.2;color:#6b7280;min-width:28px;">16<br>ABR</div>
+          <div>
+            <div style="font-family:'Libre Baskerville',Georgia,serif;font-size:13.5px;font-weight:700;color:#1a1a1a;">"Colombia Decide su Energía" — Noticias Caracol · Congreso Naturgas</div>
+            <div style="font-family:'Source Sans 3',Arial,sans-serif;font-size:12px;color:#6b7280;margin-top:3px;">Cartagena · Paloma Valencia, Sergio Fajardo, Claudia López, Roy Barreras · Tema: crisis energética</div>
           </div>
-
-          <!-- 16 ABR 2026 -->
-          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:10px 14px;background:#f8fafc;border-radius:8px;border-left:3px solid #059669;">
-            <span style="font-size:20px;">⚡</span>
-            <div>
-              <div style="font-size:13px;font-weight:700;color:#111827;">"Colombia Decide su Energía" — Noticias Caracol · Congreso Naturgas</div>
-              <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">16 abr 2026 · Cartagena · Paloma Valencia, Sergio Fajardo, Claudia López, Roy Barreras · Tema: crisis energética y precios Costa Caribe</div>
-            </div>
-            <a href="https://www.youtube.com/watch?v=rWBz4lhmtx4" target="_blank" rel="noopener"
-               style="font-size:11px;font-weight:600;color:#fff;background:#dc2626;padding:5px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;">▶ Ver</a>
-          </div>
-
-          <!-- 24 MAR 2026 -->
-          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:10px 14px;background:#f8fafc;border-radius:8px;border-left:3px solid #2563eb;">
-            <span style="font-size:20px;">🎙️</span>
-            <div>
-              <div style="font-size:13px;font-weight:700;color:#111827;">Debate El Espectador + Universidades</div>
-              <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">24 mar 2026 · U. de los Andes, U. Nacional, Dejusticia, Oxfam · Paloma Valencia, Claudia López, Roy Barreras, Luis G. Murillo</div>
-            </div>
-            <a href="https://www.elespectador.com/politica/elecciones-colombia-2026/debate-presidencial-2026-estas-son-las-propuestas-de-los-candidatos-paloma-valencia-claudia-lopez-roy-barreras-y-luis-gilberto-murillo/" target="_blank" rel="noopener"
-               style="font-size:11px;font-weight:600;color:#fff;background:#2563eb;padding:5px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;">▶ Ver</a>
-          </div>
-
-          <!-- 25 ENE 2026 -->
-          <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:10px 14px;background:#f8fafc;border-radius:8px;border-left:3px solid #d97706;">
-            <span style="font-size:20px;">🎙️</span>
-            <div>
-              <div style="font-size:13px;font-weight:700;color:#111827;">"El Debate de la Gente" — Gran Consulta por Colombia</div>
-              <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">25 ene 2026 · El Tiempo, RCN, Citytv, La FM · Paloma Valencia, J. D. Oviedo, J. M. Galán, Vicky Dávila y 5 más</div>
-            </div>
-            <a href="https://www.youtube.com/watch?v=c98I2A00wbA" target="_blank" rel="noopener"
-               style="font-size:11px;font-weight:600;color:#fff;background:#dc2626;padding:5px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;">▶ Ver</a>
-          </div>
-
-          <div style="text-align:center;padding-top:6px;">
-            <a href="https://www.youtube.com/playlist?list=PLazv5nJTMUQbdkNLThFmayKPVOCdNXnA5" target="_blank" rel="noopener"
-               style="font-size:12px;font-weight:600;color:#dc2626;text-decoration:none;">▶ Ver playlist completa de debates en YouTube (Noticias Caracol) →</a>
-          </div>
-
+          <a href="https://www.youtube.com/watch?v=rWBz4lhmtx4" target="_blank" rel="noopener"
+             style="font-family:'Source Sans 3',Arial,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:#cc0000;padding:6px 12px;text-decoration:none;white-space:nowrap;">▶ Ver</a>
         </div>
+
+        <!-- 24 MAR 2026 -->
+        <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:12px 16px;background:#f9f8f4;border-left:3px solid #5b5ea6;">
+          <div style="font-family:'Libre Baskerville',Georgia,serif;font-size:11px;font-weight:700;text-align:center;line-height:1.2;color:#6b7280;min-width:28px;">24<br>MAR</div>
+          <div>
+            <div style="font-family:'Libre Baskerville',Georgia,serif;font-size:13.5px;font-weight:700;color:#1a1a1a;">Debate El Espectador + Universidades</div>
+            <div style="font-family:'Source Sans 3',Arial,sans-serif;font-size:12px;color:#6b7280;margin-top:3px;">U. de los Andes, U. Nacional, Dejusticia, Oxfam · Paloma Valencia, Claudia López, Roy Barreras, Luis G. Murillo</div>
+          </div>
+          <a href="https://www.elespectador.com/politica/elecciones-colombia-2026/debate-presidencial-2026-estas-son-las-propuestas-de-los-candidatos-paloma-valencia-claudia-lopez-roy-barreras-y-luis-gilberto-murillo/" target="_blank" rel="noopener"
+             style="font-family:'Source Sans 3',Arial,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:#cc0000;padding:6px 12px;text-decoration:none;white-space:nowrap;">▶ Ver</a>
+        </div>
+
+        <!-- 25 ENE 2026 -->
+        <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:12px 16px;background:#f9f8f4;border-left:3px solid #d97706;">
+          <div style="font-family:'Libre Baskerville',Georgia,serif;font-size:11px;font-weight:700;text-align:center;line-height:1.2;color:#6b7280;min-width:28px;">25<br>ENE</div>
+          <div>
+            <div style="font-family:'Libre Baskerville',Georgia,serif;font-size:13.5px;font-weight:700;color:#1a1a1a;">"El Debate de la Gente" — Gran Consulta por Colombia</div>
+            <div style="font-family:'Source Sans 3',Arial,sans-serif;font-size:12px;color:#6b7280;margin-top:3px;">El Tiempo, RCN, Citytv, La FM · Paloma Valencia, J. D. Oviedo, J. M. Galán, Vicky Dávila y 5 más</div>
+          </div>
+          <a href="https://www.youtube.com/watch?v=c98I2A00wbA" target="_blank" rel="noopener"
+             style="font-family:'Source Sans 3',Arial,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:#cc0000;padding:6px 12px;text-decoration:none;white-space:nowrap;">▶ Ver</a>
+        </div>
+
+        <div style="text-align:center;padding-top:8px;border-top:1px solid var(--border);margin-top:4px;">
+          <a href="https://www.youtube.com/playlist?list=PLazv5nJTMUQbdkNLThFmayKPVOCdNXnA5" target="_blank" rel="noopener"
+             style="font-family:'Source Sans 3',Arial,sans-serif;font-size:12.5px;font-weight:700;color:#cc0000;text-decoration:none;">▶ Ver playlist completa de debates en YouTube (Noticias Caracol) →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── TRES CARDS EN UNA SOLA FILA ── -->
+    <div class="cards-3col" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+
+      <div style="background:#fff; padding:20px; border:1px solid var(--border);">
+        <div style="font-size:28px;margin-bottom:10px;">📋</div>
+        <h3 style="font-family:'Libre Baskerville',Georgia,serif;font-size:15px;font-weight:700;margin-bottom:8px;">¿Estoy inscrito?</h3>
+        <p style="font-family:'Source Sans 3',Arial,sans-serif;font-size:13.5px;color:#4a5568;margin-bottom:12px;line-height:1.55;">Verifica tu cédula en la Registraduría Nacional.</p>
+        <a href="https://wapp.registraduria.gov.co/electoral/2026/presidente-de-la-republica/" target="_blank" rel="noopener"
+           style="font-family:'Source Sans 3',Arial,sans-serif;font-size:12.5px;font-weight:700;color:#cc0000;text-decoration:none;">→ Consultar en Registraduría</a>
       </div>
 
       <div style="background:#fff; padding:20px; border:1px solid var(--border);">
-        <div style="font-size:32px;margin-bottom:8px;">🔍</div>
-        <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;">Verificación de datos</h3>
-        <p style="font-size:13px;color:#4a5568;margin-bottom:10px;">Consulta fact-checkers independientes antes de compartir información.</p>
+        <div style="font-size:28px;margin-bottom:10px;">📅</div>
+        <h3 style="font-family:'Libre Baskerville',Georgia,serif;font-size:15px;font-weight:700;margin-bottom:8px;">Fechas clave 2026</h3>
+        <p style="font-family:'Source Sans 3',Arial,sans-serif;font-size:13.5px;color:#4a5568;line-height:1.6;">🗓 <strong>31 mayo</strong>: Primera vuelta<br>🗓 <strong>21 junio</strong>: Segunda vuelta (si aplica)</p>
+      </div>
+
+      <div style="background:#fff; padding:20px; border:1px solid var(--border);">
+        <div style="font-size:28px;margin-bottom:10px;">🔍</div>
+        <h3 style="font-family:'Libre Baskerville',Georgia,serif;font-size:15px;font-weight:700;margin-bottom:8px;">Verificación de datos</h3>
+        <p style="font-family:'Source Sans 3',Arial,sans-serif;font-size:13.5px;color:#4a5568;margin-bottom:12px;line-height:1.55;">Consulta fact-checkers independientes antes de compartir información.</p>
         <a href="https://www.colombiacheck.com/" target="_blank" rel="noopener"
-           style="font-size:12px;font-weight:600;color:#1a56db;text-decoration:none;">→ ColombiaCheck</a>
+           style="font-family:'Source Sans 3',Arial,sans-serif;font-size:12.5px;font-weight:700;color:#cc0000;text-decoration:none;">→ ColombiaCheck</a>
       </div>
 
     </div>
