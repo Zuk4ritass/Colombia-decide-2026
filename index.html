@@ -5,17 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Colombia Decide 2026 — Comparativa de Programas de Gobierno</title>
   <meta name="description" content="Compara de forma objetiva los programas de gobierno de los candidatos a la presidencia de Colombia 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     /* ── Reset & Variables ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #f0f4f8;
+      --bg:        #faf9f5;
       --surface:   #ffffff;
-      --border:    #e2e8f0;
-      --text:      #1a202c;
-      --muted:     #718096;
-      --accent:    #1a56db;
+      --border:    #d6d3c8;
+      --border-dark: #1a1a1a;
+      --text:      #1a1a1a;
+      --muted:     #6b6459;
+      --accent:    #c00;        /* Economist red — used sparingly */
+      --rule:      #1a1a1a;
 
       /* Candidate colors — paleta neutra sin rojo ni azul partidista */
       --cepeda:    #0e7490;
@@ -25,124 +30,163 @@
       --claudia:   #7c3aed;
       --fajardo:   #d97706;
 
-      --radius: 14px;
-      --shadow: 0 2px 16px rgba(0,0,0,.08);
-      --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+      --radius: 0px;
+      --shadow: none;
+      --shadow-lg: none;
+
+      --serif: 'Libre Baskerville', Georgia, serif;
+      --sans:  'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
     }
 
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: var(--sans);
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
     }
 
-    /* ── HERO ── */
+    /* ── HERO — solid dark, editorial ── */
     .hero {
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a6e 50%, #1a56db 100%);
+      background: #1a1a1a;
       color: #fff;
-      padding: 64px 24px 48px;
+      padding: 56px 24px 44px;
       text-align: center;
       position: relative;
-      overflow: hidden;
+      border-bottom: 4px solid var(--accent);
     }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
+    .hero::before { display: none; }
     .hero-flag {
-      font-size: 40px;
-      margin-bottom: 12px;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .hero-kicker {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 10px;
     }
     .hero h1 {
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1.1;
-      margin-bottom: 12px;
+      font-family: var(--serif);
+      font-size: clamp(26px, 5vw, 46px);
+      font-weight: 700;
+      letter-spacing: -.5px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      color: #fff;
     }
-    .hero h1 span { color: #fbbf24; }
+    .hero h1 span { color: #e8c96e; font-style: italic; }
     .hero p {
-      font-size: clamp(15px, 2vw, 18px);
-      color: rgba(255,255,255,.75);
-      max-width: 600px;
-      margin: 0 auto 32px;
+      font-family: var(--sans);
+      font-size: clamp(14px, 2vw, 16px);
+      color: rgba(255,255,255,.72);
+      max-width: 580px;
+      margin: 0 auto 28px;
+      line-height: 1.65;
     }
     .hero-badges {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
       flex-wrap: wrap;
     }
     .badge {
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.2);
-      color: #fff;
-      padding: 8px 18px;
-      border-radius: 999px;
-      font-size: 13px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.3);
+      color: rgba(255,255,255,.85);
+      padding: 6px 14px;
+      border-radius: 0;
+      font-size: 11.5px;
       font-weight: 600;
-      backdrop-filter: blur(4px);
+      letter-spacing: .3px;
     }
-    .badge.warning { background: rgba(251,191,36,.15); border-color: rgba(251,191,36,.4); color: #fbbf24; }
+    .badge.warning {
+      border-color: rgba(232,201,110,.5);
+      color: #e8c96e;
+    }
 
-    /* Countdown */
+    /* Countdown — clean, editorial */
     .countdown-wrap {
-      margin-top: 32px;
+      margin-top: 28px;
       display: flex;
       justify-content: center;
-      gap: 16px;
+      gap: 0;
       flex-wrap: wrap;
     }
     .countdown-box {
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 10px;
-      padding: 12px 20px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.18);
+      border-right: none;
+      padding: 10px 22px;
       text-align: center;
       min-width: 72px;
     }
+    .countdown-box:last-child { border-right: 1px solid rgba(255,255,255,.18); }
     .countdown-box .num {
-      font-size: 32px;
-      font-weight: 800;
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
       line-height: 1;
       display: block;
     }
     .countdown-box .lbl {
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: rgba(255,255,255,.6);
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,.5);
       margin-top: 4px;
     }
 
     /* ── DISCLAIMER ── */
     .disclaimer {
-      background: #fffbeb;
-      border-left: 4px solid #f59e0b;
-      padding: 14px 20px;
+      background: #fff8e6;
+      border-left: 4px solid #b8860b;
+      padding: 12px 20px;
       margin: 24px auto;
       max-width: 1140px;
-      border-radius: 0 8px 8px 0;
       font-size: 13px;
-      color: #78350f;
+      color: #5c4a00;
+      font-family: var(--sans);
     }
-    .disclaimer strong { color: #92400e; }
+    .disclaimer strong { color: #3d3000; }
 
     /* ── LAYOUT ── */
     .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
-    .section { padding: 48px 0; }
-    .section-title {
-      font-size: clamp(20px, 3vw, 28px);
-      font-weight: 700;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .section { padding: 44px 0; }
+
+    /* Economist rubric — thick rule + small caps label above title */
+    .section-rubric {
+      border-top: 3px solid var(--rule);
+      padding-top: 10px;
+      margin-bottom: 20px;
     }
-    .section-title .icon { font-size: 28px; }
-    .section-sub { color: var(--muted); margin-bottom: 28px; font-size: 14px; }
+    .section-kicker {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text);
+    }
+    .section-title .icon { display: none; }
+    .section-sub {
+      color: var(--muted);
+      margin-top: 6px;
+      margin-bottom: 0;
+      font-size: 14px;
+      font-family: var(--sans);
+    }
 
     /* ── CANDIDATE CARDS ── */
     .candidates-grid {
@@ -152,79 +196,86 @@
     }
     .candidate-card {
       background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      transition: transform .2s, box-shadow .2s;
       border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color .2s;
     }
-    .candidate-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-lg);
+    .candidate-card:hover { border-color: #999; }
+
+    /* Top accent bar in candidate color */
+    .candidate-card::before {
+      content: '';
+      display: block;
+      height: 4px;
     }
+    .candidate-card[data-c="cepeda"]::before    { background: var(--cepeda); }
+    .candidate-card[data-c="espriella"]::before { background: var(--espriella); }
+    .candidate-card[data-c="paloma"]::before    { background: var(--paloma); }
+    .candidate-card[data-c="barreras"]::before  { background: var(--barreras); }
+    .candidate-card[data-c="claudia"]::before   { background: var(--claudia); }
+    .candidate-card[data-c="fajardo"]::before   { background: var(--fajardo); }
+
     .card-header {
-      padding: 20px 20px 16px;
+      padding: 18px 20px 14px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       border-bottom: 1px solid var(--border);
     }
     .avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
+      width: 52px;
+      height: 52px;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      font-weight: 800;
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
       color: #fff;
       flex-shrink: 0;
-      border: 3px solid rgba(255,255,255,.4);
     }
-    .card-name { font-size: 17px; font-weight: 700; line-height: 1.2; }
-    .card-vp { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .card-name {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .card-vp { font-size: 11.5px; color: var(--muted); margin-top: 3px; font-family: var(--sans); }
     .card-party {
       display: inline-block;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 999px;
-      margin-top: 6px;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      margin-top: 5px;
       color: #fff;
     }
-    .card-position {
-      font-size: 10.5px;
-      color: var(--muted);
-      margin-top: 3px;
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: opacity .25s ease, max-height .25s ease;
-    }
-    .candidate-card:hover .card-position {
-      opacity: 1;
-      max-height: 20px;
-    }
-    .card-body { padding: 16px 20px; }
+    .card-position { display: none; }
+    .card-body { padding: 14px 20px; }
 
     /* ── Acordeón de perfil ── */
     .profile-accordion {
-      margin-top: 14px;
+      margin-top: 12px;
       border-top: 1px solid var(--border);
       padding-top: 10px;
     }
     .profile-accordion summary {
       list-style: none;
       cursor: pointer;
-      font-size: 11.5px;
-      font-weight: 600;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       color: var(--muted);
       display: flex;
       align-items: center;
       gap: 5px;
       user-select: none;
-      transition: color .2s;
+      transition: color .15s;
     }
     .profile-accordion summary::-webkit-details-marker { display: none; }
     .profile-accordion summary:hover { color: var(--text); }
@@ -233,24 +284,25 @@
     .profile-accordion[open] .acc-arrow { transform: rotate(180deg); }
     .profile-section { margin-bottom: 10px; }
     .profile-label {
-      font-size: 9.5px;
+      font-family: var(--sans);
+      font-size: 9px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .7px;
+      letter-spacing: 1.2px;
       color: var(--muted);
       margin-bottom: 3px;
     }
     .profile-text {
+      font-family: var(--sans);
       font-size: 12px;
-      color: #374151;
+      color: #3a3530;
       line-height: 1.6;
     }
     .profile-vp {
-      background: #f8fafc;
-      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
       padding: 12px;
       margin-top: 12px;
-      border: 1px solid var(--border);
     }
     .vp-header {
       display: flex;
@@ -259,45 +311,48 @@
       margin-bottom: 10px;
     }
     .vp-avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       color: white;
       flex-shrink: 0;
     }
-    .vp-name { font-size: 13px; font-weight: 700; color: var(--text); }
-    .vp-role { font-size: 10.5px; color: var(--muted); margin-top: 1px; }
+    .vp-name { font-family: var(--serif); font-size: 13px; font-weight: 700; color: var(--text); }
+    .vp-role { font-family: var(--sans); font-size: 10px; color: var(--muted); margin-top: 1px; letter-spacing: .3px; }
     .card-body p {
+      font-family: var(--sans);
       font-size: 13px;
-      color: #4a5568;
+      color: #4a4540;
       margin-bottom: 12px;
-      line-height: 1.5;
+      line-height: 1.55;
     }
     .card-links { display: flex; gap: 8px; flex-wrap: wrap; }
     .card-link {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      font-size: 12px;
-      font-weight: 600;
+      font-family: var(--sans);
+      font-size: 11.5px;
+      font-weight: 700;
       padding: 6px 12px;
-      border-radius: 8px;
+      border-radius: 0;
       text-decoration: none;
-      transition: opacity .2s;
+      transition: opacity .15s;
       color: #fff;
     }
-    .card-link:hover { opacity: .85; }
+    .card-link:hover { opacity: .82; }
     .card-link.outline {
       background: transparent;
       border: 1.5px solid currentColor;
       color: inherit;
     }
     .no-link {
+      font-family: var(--sans);
       font-size: 12px;
       color: var(--muted);
       display: flex;
@@ -305,32 +360,35 @@
       gap: 4px;
     }
 
-    /* ── COMPARATIVA POR TEMA ── */
+    /* ── COMPARATIVA POR TEMA — underline tabs ── */
     .tabs {
       display: flex;
-      gap: 8px;
+      gap: 0;
       flex-wrap: wrap;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
+      border-bottom: 2px solid var(--border);
     }
     .tab-btn {
-      padding: 10px 20px;
-      border: 2px solid var(--border);
-      border-radius: 999px;
-      background: var(--surface);
-      font-size: 14px;
-      font-weight: 600;
+      padding: 10px 18px;
+      border: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      background: transparent;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 700;
       cursor: pointer;
-      transition: all .2s;
+      transition: color .15s, border-color .15s;
       color: var(--muted);
       display: flex;
       align-items: center;
       gap: 6px;
+      letter-spacing: .2px;
     }
-    .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .tab-btn:hover { color: var(--text); border-bottom-color: var(--border-dark); }
     .tab-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
+      color: var(--text);
+      border-bottom-color: var(--accent);
     }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
@@ -342,51 +400,74 @@
     }
     .compare-card {
       background: var(--surface);
-      border-radius: var(--radius);
       border: 1px solid var(--border);
       overflow: hidden;
-      box-shadow: var(--shadow);
     }
+
+    /* Compare card header: thin candidate-color top border, white bg */
     .compare-card-header {
-      padding: 12px 16px;
-      color: #fff;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
       gap: 10px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
     }
+    .compare-card-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .compare-card[data-c="cepeda"]    .compare-card-header::before { background: var(--cepeda); }
+    .compare-card[data-c="espriella"] .compare-card-header::before { background: var(--espriella); }
+    .compare-card[data-c="paloma"]    .compare-card-header::before { background: var(--paloma); }
+    .compare-card[data-c="barreras"]  .compare-card-header::before { background: var(--barreras); }
+    .compare-card[data-c="claudia"]   .compare-card-header::before { background: var(--claudia); }
+    .compare-card[data-c="fajardo"]   .compare-card-header::before { background: var(--fajardo); }
+
     .compare-card-header .mini-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.25);
+      width: 28px;
+      height: 28px;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
-      font-weight: 800;
+      font-family: var(--serif);
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
     }
-    .compare-card-header .cname { font-size: 14px; font-weight: 700; }
-    .compare-card-body { padding: 14px 16px; }
+    .compare-card-header .cname {
+      font-family: var(--serif);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .compare-card-body { padding: 12px 14px; }
     .proposal-item {
       display: flex;
       align-items: flex-start;
       gap: 8px;
-      margin-bottom: 10px;
-      font-size: 13px;
-      color: #374151;
+      margin-bottom: 9px;
+      font-family: var(--sans);
+      font-size: 12.5px;
+      color: #3a3530;
       line-height: 1.5;
     }
     .proposal-item:last-child { margin-bottom: 0; }
     .proposal-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      margin-top: 7px;
+      width: 5px;
+      height: 5px;
+      border-radius: 0;
+      margin-top: 8px;
       flex-shrink: 0;
     }
     .no-data {
+      font-family: var(--sans);
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12.5px;
       font-style: italic;
       display: flex;
       align-items: center;
@@ -394,37 +475,37 @@
     }
 
     /* ── WHAT / HOW BLOCKS ── */
-    .what-block { margin-bottom: 10px; }
+    .what-block { margin-bottom: 8px; }
     .how-block {
-      background: #f8fafc;
-      border-left: 3px solid #cbd5e0;
-      border-radius: 0 6px 6px 0;
-      padding: 10px 12px;
-      margin-top: 10px;
-      margin-bottom: 8px;
+      background: var(--bg);
+      border-left: 3px solid var(--border);
+      padding: 9px 12px;
+      margin-top: 9px;
+      margin-bottom: 7px;
     }
     .block-label {
       display: block;
-      font-size: 10px;
+      font-family: var(--sans);
+      font-size: 9px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .8px;
+      letter-spacing: 1.2px;
       color: var(--muted);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     .how-text {
-      font-size: 12.5px;
-      color: #374151;
+      font-family: var(--sans);
+      font-size: 12px;
+      color: #3a3530;
       line-height: 1.55;
       margin: 0;
     }
     .how-text.no-info {
-      color: #92400e;
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 6px;
-      padding: 6px 10px;
-      font-size: 12px;
+      color: #5c4a00;
+      background: #fff8e6;
+      border: 1px solid #d4b800;
+      padding: 5px 8px;
+      font-size: 11.5px;
       font-style: italic;
     }
 
@@ -433,60 +514,74 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-size: 11px;
-      font-weight: 600;
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .3px;
       padding: 2px 8px;
-      border-radius: 999px;
       margin-top: 8px;
       text-decoration: none;
       color: #fff;
-      opacity: .85;
-      transition: opacity .2s;
+      opacity: .88;
+      transition: opacity .15s;
     }
     .sources-tag:hover { opacity: 1; }
 
     /* ── STATS BAR ── */
     .stats-bar {
       background: var(--surface);
-      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--rule);
       padding: 20px 28px;
       display: flex;
-      gap: 32px;
+      gap: 36px;
       flex-wrap: wrap;
       margin-bottom: 40px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
       align-items: center;
     }
     .stat { text-align: center; }
-    .stat .n { font-size: 28px; font-weight: 800; color: var(--accent); line-height: 1; }
-    .stat .l { font-size: 12px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; }
+    .stat .n {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat .l {
+      font-family: var(--sans);
+      font-size: 10.5px;
+      color: var(--muted);
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
 
     /* ── POLITICAL SPECTRUM ── */
     .spectrum-bar {
       background: linear-gradient(to right, #dc2626, #7c3aed, #3b82f6, #047857);
-      height: 8px;
-      border-radius: 999px;
+      height: 6px;
       margin: 12px 0;
       position: relative;
     }
     .spectrum-label {
       display: flex;
       justify-content: space-between;
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10.5px;
       color: var(--muted);
       margin-top: 4px;
     }
 
     /* ── FOOTER ── */
     footer {
-      background: #0f172a;
-      color: rgba(255,255,255,.7);
+      background: #1a1a1a;
+      color: rgba(255,255,255,.65);
       padding: 40px 24px;
       text-align: center;
+      border-top: 4px solid var(--accent);
     }
-    footer a { color: #60a5fa; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    footer a { color: rgba(255,255,255,.75); text-decoration: underline; }
+    footer a:hover { color: #fff; }
     footer .footer-grid {
       display: flex;
       gap: 32px;
@@ -495,16 +590,24 @@
       margin-bottom: 24px;
     }
     footer .footer-col { text-align: left; min-width: 200px; }
-    footer .footer-col h4 { color: #fff; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-    footer .footer-col a { display: block; font-size: 13px; margin-bottom: 6px; color: rgba(255,255,255,.6); }
-    footer .footer-col a:hover { color: #60a5fa; }
+    footer .footer-col h4 {
+      font-family: var(--sans);
+      color: #fff;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+    }
+    footer .footer-col a { display: block; font-size: 13px; margin-bottom: 6px; color: rgba(255,255,255,.55); }
+    footer .footer-col a:hover { color: #fff; }
     .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 24px 0; }
-    .footer-note { font-size: 12px; color: rgba(255,255,255,.4); }
+    .footer-note { font-family: var(--sans); font-size: 11.5px; color: rgba(255,255,255,.35); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       .stats-bar { gap: 16px; justify-content: center; }
-      .hero { padding: 40px 16px 32px; }
+      .hero { padding: 36px 16px 28px; }
+      .tab-btn { padding: 8px 12px; font-size: 12.5px; }
     }
   </style>
 </head>
@@ -515,6 +618,7 @@
 ════════════════════════════════════ -->
 <header class="hero">
   <div class="hero-flag">🇨🇴</div>
+  <div class="hero-kicker">Colombia · Presidencia 2026</div>
   <h1>Colombia <span>Decide</span> 2026</h1>
   <p>Consulta, compara y decide con información. Programas de gobierno de los candidatos a la Presidencia de Colombia — sin sesgos, sin publicidad.</p>
   <div class="hero-badges">
@@ -547,10 +651,10 @@
     <div class="stat"><div class="n">14</div><div class="l">Candidatos inscritos</div></div>
     <div class="stat"><div class="n">6</div><div class="l">Con programa publicado</div></div>
     <div class="stat"><div class="n">5</div><div class="l">Temas comparados</div></div>
-    <div class="stat"><div class="n">31<br><small style="font-size:14px;font-weight:400;color:var(--muted)">mayo</small></div><div class="l">Primera vuelta</div></div>
-    <div class="stat"><div class="n">21<br><small style="font-size:14px;font-weight:400;color:var(--muted)">junio</small></div><div class="l">Segunda vuelta (si aplica)</div></div>
+    <div class="stat"><div class="n">31<br><small style="font-family:var(--sans);font-size:13px;font-weight:400;color:var(--muted)">mayo</small></div><div class="l">Primera vuelta</div></div>
+    <div class="stat"><div class="n">21<br><small style="font-family:var(--sans);font-size:13px;font-weight:400;color:var(--muted)">junio</small></div><div class="l">Segunda vuelta (si aplica)</div></div>
     <div style="flex:1; min-width:200px;">
-      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;font-weight:600;">Espectro político (referencia general)</div>
+      <div style="font-family:var(--sans);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;">Espectro político</div>
       <div class="spectrum-bar"></div>
       <div class="spectrum-label"><span>Izquierda</span><span>Centro</span><span>Derecha</span></div>
     </div>
@@ -562,13 +666,16 @@
 ════════════════════════════════════ -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title"><span class="icon">🧑‍💼</span> Candidatos principales</h2>
+    <div class="section-rubric">
+      <div class="section-kicker">Perfiles</div>
+      <h2 class="section-title">Candidatos principales</h2>
+    </div>
     <p class="section-sub">Los 6 candidatos con mayor visibilidad pública y programas de gobierno publicados a la fecha de esta edición (abril 2026).</p>
 
     <div class="candidates-grid">
 
       <!-- ── Iván Cepeda ── -->
-      <div class="candidate-card">
+      <div class="candidate-card" data-c="cepeda">
         <div class="card-header">
           <div class="avatar" style="background: var(--cepeda)">IC</div>
           <div>
@@ -616,7 +723,7 @@
       </div>
 
       <!-- ── Abelardo De la Espriella ── -->
-      <div class="candidate-card">
+      <div class="candidate-card" data-c="espriella">
         <div class="card-header">
           <div class="avatar" style="background: var(--espriella)">AE</div>
           <div>
@@ -664,7 +771,7 @@
       </div>
 
       <!-- ── Paloma Valencia ── -->
-      <div class="candidate-card">
+      <div class="candidate-card" data-c="paloma">
         <div class="card-header">
           <div class="avatar" style="background: var(--paloma)">PV</div>
           <div>
@@ -712,7 +819,7 @@
       </div>
 
       <!-- ── Roy Barreras ── -->
-      <div class="candidate-card">
+      <div class="candidate-card" data-c="barreras">
         <div class="card-header">
           <div class="avatar" style="background: var(--barreras)">RB</div>
           <div>
@@ -758,7 +865,7 @@
       </div>
 
       <!-- ── Claudia López ── -->
-      <div class="candidate-card">
+      <div class="candidate-card" data-c="claudia">
         <div class="card-header">
           <div class="avatar" style="background: var(--claudia)">CL</div>
           <div>
@@ -806,7 +913,7 @@
       </div>
 
       <!-- ── Sergio Fajardo ── -->
-      <div class="candidate-card">
+      <div class="candidate-card" data-c="fajardo">
         <div class="card-header">
           <div class="avatar" style="background: var(--fajardo)">SF</div>
           <div>
@@ -860,9 +967,12 @@
 <!-- ════════════════════════════════════
      COMPARATIVA POR TEMA
 ════════════════════════════════════ -->
-<section class="section" style="background: #edf2f7; border-radius: 0;">
+<section class="section" style="background: var(--bg);">
   <div class="container">
-    <h2 class="section-title"><span class="icon">⚖️</span> Comparativa por tema prioritario</h2>
+    <div class="section-rubric">
+      <div class="section-kicker">Análisis</div>
+      <h2 class="section-title">Comparativa por tema prioritario</h2>
+    </div>
     <p class="section-sub">Selecciona un eje para ver las propuestas de cada candidato. Las propuestas se extractaron de programas oficiales y declaraciones verificadas por medios de referencia.</p>
 
     <!-- Tabs -->
@@ -878,8 +988,8 @@
     <div class="tab-panel active" id="tab-salud">
       <div class="compare-grid">
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--cepeda)">
+        <div class="compare-card" data-c="cepeda">
+          <div class="compare-card-header">
             <div class="mini-avatar">IC</div>
             <div class="cname">Iván Cepeda — Pacto Histórico</div>
           </div>
@@ -898,8 +1008,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--espriella)">
+        <div class="compare-card" data-c="espriella">
+          <div class="compare-card-header">
             <div class="mini-avatar">AE</div>
             <div class="cname">Abelardo De la Espriella</div>
           </div>
@@ -918,8 +1028,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--paloma)">
+        <div class="compare-card" data-c="paloma">
+          <div class="compare-card-header">
             <div class="mini-avatar">PV</div>
             <div class="cname">Paloma Valencia — Colombia Más Grande</div>
           </div>
@@ -938,8 +1048,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--barreras)">
+        <div class="compare-card" data-c="barreras">
+          <div class="compare-card-header">
             <div class="mini-avatar">RB</div>
             <div class="cname">Roy Barreras — Fuerza por la Paz</div>
           </div>
@@ -956,8 +1066,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--claudia)">
+        <div class="compare-card" data-c="claudia">
+          <div class="compare-card-header">
             <div class="mini-avatar">CL</div>
             <div class="cname">Claudia López — Las Soluciones</div>
           </div>
@@ -975,8 +1085,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--fajardo)">
+        <div class="compare-card" data-c="fajardo">
+          <div class="compare-card-header">
             <div class="mini-avatar">SF</div>
             <div class="cname">Sergio Fajardo — Dignidad y Compromiso</div>
           </div>
@@ -1004,8 +1114,8 @@
     <div class="tab-panel" id="tab-educacion">
       <div class="compare-grid">
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--cepeda)">
+        <div class="compare-card" data-c="cepeda">
+          <div class="compare-card-header">
             <div class="mini-avatar">IC</div>
             <div class="cname">Iván Cepeda — Pacto Histórico</div>
           </div>
@@ -1024,8 +1134,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--espriella)">
+        <div class="compare-card" data-c="espriella">
+          <div class="compare-card-header">
             <div class="mini-avatar">AE</div>
             <div class="cname">Abelardo De la Espriella</div>
           </div>
@@ -1044,8 +1154,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--paloma)">
+        <div class="compare-card" data-c="paloma">
+          <div class="compare-card-header">
             <div class="mini-avatar">PV</div>
             <div class="cname">Paloma Valencia — Colombia Más Grande</div>
           </div>
@@ -1065,8 +1175,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--barreras)">
+        <div class="compare-card" data-c="barreras">
+          <div class="compare-card-header">
             <div class="mini-avatar">RB</div>
             <div class="cname">Roy Barreras — Fuerza por la Paz</div>
           </div>
@@ -1082,8 +1192,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--claudia)">
+        <div class="compare-card" data-c="claudia">
+          <div class="compare-card-header">
             <div class="mini-avatar">CL</div>
             <div class="cname">Claudia López — Las Soluciones</div>
           </div>
@@ -1102,8 +1212,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--fajardo)">
+        <div class="compare-card" data-c="fajardo">
+          <div class="compare-card-header">
             <div class="mini-avatar">SF</div>
             <div class="cname">Sergio Fajardo — Dignidad y Compromiso</div>
           </div>
@@ -1131,8 +1241,8 @@
     <div class="tab-panel" id="tab-seguridad">
       <div class="compare-grid">
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--cepeda)">
+        <div class="compare-card" data-c="cepeda">
+          <div class="compare-card-header">
             <div class="mini-avatar">IC</div>
             <div class="cname">Iván Cepeda — Pacto Histórico</div>
           </div>
@@ -1151,8 +1261,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--espriella)">
+        <div class="compare-card" data-c="espriella">
+          <div class="compare-card-header">
             <div class="mini-avatar">AE</div>
             <div class="cname">Abelardo De la Espriella</div>
           </div>
@@ -1171,8 +1281,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--paloma)">
+        <div class="compare-card" data-c="paloma">
+          <div class="compare-card-header">
             <div class="mini-avatar">PV</div>
             <div class="cname">Paloma Valencia — Colombia Más Grande</div>
           </div>
@@ -1191,8 +1301,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--barreras)">
+        <div class="compare-card" data-c="barreras">
+          <div class="compare-card-header">
             <div class="mini-avatar">RB</div>
             <div class="cname">Roy Barreras — Fuerza por la Paz</div>
           </div>
@@ -1209,8 +1319,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--claudia)">
+        <div class="compare-card" data-c="claudia">
+          <div class="compare-card-header">
             <div class="mini-avatar">CL</div>
             <div class="cname">Claudia López — Las Soluciones</div>
           </div>
@@ -1229,8 +1339,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--fajardo)">
+        <div class="compare-card" data-c="fajardo">
+          <div class="compare-card-header">
             <div class="mini-avatar">SF</div>
             <div class="cname">Sergio Fajardo — Dignidad y Compromiso</div>
           </div>
@@ -1258,8 +1368,8 @@
     <div class="tab-panel" id="tab-economia">
       <div class="compare-grid">
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--cepeda)">
+        <div class="compare-card" data-c="cepeda">
+          <div class="compare-card-header">
             <div class="mini-avatar">IC</div>
             <div class="cname">Iván Cepeda — Pacto Histórico</div>
           </div>
@@ -1278,8 +1388,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--espriella)">
+        <div class="compare-card" data-c="espriella">
+          <div class="compare-card-header">
             <div class="mini-avatar">AE</div>
             <div class="cname">Abelardo De la Espriella</div>
           </div>
@@ -1298,8 +1408,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--paloma)">
+        <div class="compare-card" data-c="paloma">
+          <div class="compare-card-header">
             <div class="mini-avatar">PV</div>
             <div class="cname">Paloma Valencia — Colombia Más Grande</div>
           </div>
@@ -1318,8 +1428,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--barreras)">
+        <div class="compare-card" data-c="barreras">
+          <div class="compare-card-header">
             <div class="mini-avatar">RB</div>
             <div class="cname">Roy Barreras — Fuerza por la Paz</div>
           </div>
@@ -1336,8 +1446,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--claudia)">
+        <div class="compare-card" data-c="claudia">
+          <div class="compare-card-header">
             <div class="mini-avatar">CL</div>
             <div class="cname">Claudia López — Las Soluciones</div>
           </div>
@@ -1356,8 +1466,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--fajardo)">
+        <div class="compare-card" data-c="fajardo">
+          <div class="compare-card-header">
             <div class="mini-avatar">SF</div>
             <div class="cname">Sergio Fajardo — Dignidad y Compromiso</div>
           </div>
@@ -1385,8 +1495,8 @@
     <div class="tab-panel" id="tab-tecnologia">
       <div class="compare-grid">
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--cepeda)">
+        <div class="compare-card" data-c="cepeda">
+          <div class="compare-card-header">
             <div class="mini-avatar">IC</div>
             <div class="cname">Iván Cepeda — Pacto Histórico</div>
           </div>
@@ -1404,8 +1514,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--espriella)">
+        <div class="compare-card" data-c="espriella">
+          <div class="compare-card-header">
             <div class="mini-avatar">AE</div>
             <div class="cname">Abelardo De la Espriella</div>
           </div>
@@ -1424,8 +1534,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--paloma)">
+        <div class="compare-card" data-c="paloma">
+          <div class="compare-card-header">
             <div class="mini-avatar">PV</div>
             <div class="cname">Paloma Valencia — Colombia Más Grande</div>
           </div>
@@ -1444,8 +1554,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--barreras)">
+        <div class="compare-card" data-c="barreras">
+          <div class="compare-card-header">
             <div class="mini-avatar">RB</div>
             <div class="cname">Roy Barreras — Fuerza por la Paz</div>
           </div>
@@ -1461,8 +1571,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--claudia)">
+        <div class="compare-card" data-c="claudia">
+          <div class="compare-card-header">
             <div class="mini-avatar">CL</div>
             <div class="cname">Claudia López — Las Soluciones</div>
           </div>
@@ -1481,8 +1591,8 @@
           </div>
         </div>
 
-        <div class="compare-card">
-          <div class="compare-card-header" style="background: var(--fajardo)">
+        <div class="compare-card" data-c="fajardo">
+          <div class="compare-card-header">
             <div class="mini-avatar">SF</div>
             <div class="cname">Sergio Fajardo — Dignidad y Compromiso</div>
           </div>
@@ -1514,12 +1624,15 @@
 ════════════════════════════════════ -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title"><span class="icon">🗳️</span> ¿Cómo participar en las elecciones?</h2>
+    <div class="section-rubric">
+      <div class="section-kicker">Guía Electoral</div>
+      <h2 class="section-title">¿Cómo participar en las elecciones?</h2>
+    </div>
     <p class="section-sub">Información práctica para ejercer tu derecho al voto.</p>
 
     <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;">
 
-      <div style="background:#fff; border-radius:12px; padding:20px; border:1px solid var(--border); box-shadow:var(--shadow);">
+      <div style="background:#fff; padding:20px; border:1px solid var(--border);">
         <div style="font-size:32px;margin-bottom:8px;">📋</div>
         <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;">¿Estoy inscrito?</h3>
         <p style="font-size:13px;color:#4a5568;margin-bottom:10px;">Verifica tu cédula en la Registraduría Nacional.</p>
@@ -1527,17 +1640,17 @@
            style="font-size:12px;font-weight:600;color:#1a56db;text-decoration:none;">→ Consultar en Registraduría</a>
       </div>
 
-      <div style="background:#fff; border-radius:12px; padding:20px; border:1px solid var(--border); box-shadow:var(--shadow);">
+      <div style="background:#fff; padding:20px; border:1px solid var(--border);">
         <div style="font-size:32px;margin-bottom:8px;">📅</div>
         <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;">Fechas clave 2026</h3>
         <p style="font-size:13px;color:#4a5568;">🗓 <strong>31 mayo</strong>: Primera vuelta<br>🗓 <strong>21 junio</strong>: Segunda vuelta (si aplica)</p>
       </div>
 
-      <div style="background:#fff; border-radius:12px; padding:20px; border:1px solid var(--border); box-shadow:var(--shadow); grid-column: 1 / -1;">
+      <div style="background:#fff; padding:20px; border:1px solid var(--border); grid-column: 1 / -1;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
           <span style="font-size:28px;">📺</span>
           <div>
-            <h3 style="font-size:15px;font-weight:700;margin:0;">Debates presidenciales 2026</h3>
+            <h3 style="font-family:'Libre Baskerville',Georgia,serif;font-size:15px;font-weight:700;margin:0;">Debates presidenciales 2026</h3>
             <p style="font-size:12px;color:#6b7280;margin:2px 0 0;">Todos los debates realizados y programados hacia la primera vuelta del 31 de mayo</p>
           </div>
         </div>
@@ -1594,7 +1707,7 @@
         </div>
       </div>
 
-      <div style="background:#fff; border-radius:12px; padding:20px; border:1px solid var(--border); box-shadow:var(--shadow);">
+      <div style="background:#fff; padding:20px; border:1px solid var(--border);">
         <div style="font-size:32px;margin-bottom:8px;">🔍</div>
         <h3 style="font-size:15px;font-weight:700;margin-bottom:6px;">Verificación de datos</h3>
         <p style="font-size:13px;color:#4a5568;margin-bottom:10px;">Consulta fact-checkers independientes antes de compartir información.</p>
