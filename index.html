@@ -225,8 +225,8 @@
       border-bottom: 1px solid var(--border);
     }
     .avatar {
-      width: 52px;
-      height: 52px;
+      width: 72px;
+      height: 72px;
       border-radius: 0;
       display: flex;
       align-items: center;
@@ -236,6 +236,20 @@
       font-weight: 700;
       color: #fff;
       flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+    .avatar .avatar-initials {
+      position: relative;
+      z-index: 1;
     }
     .card-name {
       font-family: var(--serif);
@@ -692,7 +706,7 @@
       <!-- ── Iván Cepeda ── -->
       <div class="candidate-card" data-c="cepeda">
         <div class="card-header">
-          <div class="avatar" style="background: var(--cepeda)">IC</div>
+          <div class="avatar" style="background: var(--cepeda)"><span class="avatar-initials">IC</span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Ivan_Cepeda.jpg/280px-Ivan_Cepeda.jpg" alt="Iván Cepeda Castro" onerror="this.remove()"></div>
           <div>
             <div class="card-name">Iván Cepeda Castro</div>
             <div class="card-vp">VP fórmula: Aida Quilcué</div>
@@ -740,7 +754,7 @@
       <!-- ── Abelardo De la Espriella ── -->
       <div class="candidate-card" data-c="espriella">
         <div class="card-header">
-          <div class="avatar" style="background: var(--espriella)">AE</div>
+          <div class="avatar" style="background: var(--espriella)"><span class="avatar-initials">AE</span></div>
           <div>
             <div class="card-name">Abelardo De la Espriella</div>
             <div class="card-vp">VP fórmula: José Manuel Restrepo</div>
@@ -788,7 +802,7 @@
       <!-- ── Paloma Valencia ── -->
       <div class="candidate-card" data-c="paloma">
         <div class="card-header">
-          <div class="avatar" style="background: var(--paloma)">PV</div>
+          <div class="avatar" style="background: var(--paloma)"><span class="avatar-initials">PV</span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Paloma_Valencia.png/280px-Paloma_Valencia.png" alt="Paloma Valencia" onerror="this.remove()"></div>
           <div>
             <div class="card-name">Paloma Valencia</div>
             <div class="card-vp">VP fórmula: Juan Daniel Oviedo</div>
@@ -836,7 +850,7 @@
       <!-- ── Roy Barreras ── -->
       <div class="candidate-card" data-c="barreras">
         <div class="card-header">
-          <div class="avatar" style="background: var(--barreras)">RB</div>
+          <div class="avatar" style="background: var(--barreras)"><span class="avatar-initials">RB</span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Roy_Barreras.jpg/280px-Roy_Barreras.jpg" alt="Roy Barreras" onerror="this.remove()"></div>
           <div>
             <div class="card-name">Roy Barreras</div>
             <div class="card-vp">VP fórmula: Martha Lucía Zamora</div>
@@ -882,7 +896,7 @@
       <!-- ── Claudia López ── -->
       <div class="candidate-card" data-c="claudia">
         <div class="card-header">
-          <div class="avatar" style="background: var(--claudia)">CL</div>
+          <div class="avatar" style="background: var(--claudia)"><span class="avatar-initials">CL</span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Claudia_colombia.jpg/280px-Claudia_colombia.jpg" alt="Claudia López" onerror="this.remove()"></div>
           <div>
             <div class="card-name">Claudia López</div>
             <div class="card-vp">VP fórmula: Leonardo Huerta</div>
@@ -930,7 +944,7 @@
       <!-- ── Sergio Fajardo ── -->
       <div class="candidate-card" data-c="fajardo">
         <div class="card-header">
-          <div class="avatar" style="background: var(--fajardo)">SF</div>
+          <div class="avatar" style="background: var(--fajardo)"><span class="avatar-initials">SF</span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Sergio_Fajardo_Valderrama.jpg/280px-Sergio_Fajardo_Valderrama.jpg" alt="Sergio Fajardo" onerror="this.remove()"></div>
           <div>
             <div class="card-name">Sergio Fajardo</div>
             <div class="card-vp">VP fórmula: Edna Bonilla</div>
